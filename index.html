@@ -6,49 +6,43 @@
   <title>MangaPages — Lectura inmersiva con IA</title>
   <meta name="description" content="Convierte cualquier libro en una experiencia visual inmersiva con estética anime/manga. Imágenes generadas en tiempo real mientras lees." />
 
-  <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            display: ["Zen Maru Gothic", "M PLUS Rounded 1c", "ui-sans-serif", "system-ui"],
-            body: ["Inter", "ui-sans-serif", "system-ui"],
+            display: ["Zen Maru Gothic","M PLUS Rounded 1c","ui-sans-serif","system-ui"],
+            body: ["Inter","ui-sans-serif","system-ui"],
           },
           colors: {
             primary: {500:'#8b5cf6',600:'#7c3aed',700:'#6d28d9'},
-            sakura: '#ff6ad5',
-            neon: '#f59e0b',
-            ink: '#0b1020',
+            sakura: '#ff6ad5', neon: '#f59e0b', ink: '#0b1020',
           },
-          boxShadow: { glow: "0 0 0 3px rgba(255,255,255,0.18), 0 10px 30px rgba(139,92,246,.35)" }
+          boxShadow: { glow:"0 0 0 3px rgba(255,255,255,0.18), 0 10px 30px rgba(139,92,246,.35)" }
         }
       }
     }
   </script>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Zen+Maru+Gothic:wght@600;800&display=swap" rel="stylesheet">
 
   <style>
-    .halftone{
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(255,106,213,.25) 0 30%, transparent 31%),
-        radial-gradient(circle at 80% 10%, rgba(139,92,246,.25) 0 28%, transparent 29%),
-        radial-gradient(circle at 70% 80%, rgba(245,158,11,.18) 0 22%, transparent 23%),
-        linear-gradient(180deg, #0b1020 0%, #0f172a 60%, #0b1020 100%);
-    }
+    .halftone{background-image:
+      radial-gradient(circle at 20% 20%, rgba(255,106,213,.25) 0 30%, transparent 31%),
+      radial-gradient(circle at 80% 10%, rgba(139,92,246,.25) 0 28%, transparent 29%),
+      radial-gradient(circle at 70% 80%, rgba(245,158,11,.18) 0 22%, transparent 23%),
+      linear-gradient(180deg,#0b1020 0%,#0f172a 60%,#0b1020 100%)}
     .panel{backdrop-filter:blur(10px);background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.18);box-shadow:0 8px 0 rgba(0,0,0,.25)}
     .speech{position:relative}
     .speech:after{content:"";position:absolute;left:1.5rem;bottom:-12px;width:16px;height:16px;background:rgba(255,255,255,.06);border-left:2px solid rgba(255,255,255,.18);border-bottom:2px solid rgba(255,255,255,.18);transform:rotate(45deg)}
     .stroke-title{text-shadow:2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000}
-    .manga-bg{background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 10px, rgba(255,255,255,0) 10px 20px)}
-    .img-placeholder{background:radial-gradient(circle at 40% 40%, rgba(255,255,255,.08) 0 40%, transparent 41%),linear-gradient(135deg, rgba(139,92,246,.35), rgba(255,106,213,.25))}
+    .manga-bg{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 10px,rgba(255,255,255,0) 10px 20px)}
+    .img-placeholder{background:radial-gradient(circle at 40% 40%,rgba(255,255,255,.08) 0 40%,transparent 41%),linear-gradient(135deg,rgba(139,92,246,.35),rgba(255,106,213,.25))}
     .speedlines{position:relative;overflow:hidden}
-    .speedlines:before{content:"";position:absolute;inset:-40% -20%;background:repeating-linear-gradient(75deg,rgba(255,255,255,.07)0 2px,transparent 2px 6px);transform:skewY(-8deg);pointer-events:none}
+    .speedlines:before{content:"";position:absolute;inset:-40% -20%;background:repeating-linear-gradient(75deg,rgba(255,255,255,.07) 0 2px,transparent 2px 6px);transform:skewY(-8deg);pointer-events:none}
     .badge-onom{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .7rem;border:2px solid rgba(255,255,255,.2);border-radius:.75rem;background:rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.25)}
     .sticker{position:absolute;right:-8px;top:-10px;transform:rotate(6deg);font-weight:800}
   </style>
@@ -99,7 +93,7 @@
         <div class="mt-8 text-xs text-slate-400">Contact: <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a></div>
       </div>
 
-      <!-- Manga panel stack (with your images) -->
+      <!-- Panels -->
       <div class="relative">
         <div class="absolute -top-8 -right-4 w-48 h-48 rounded-3xl blur-3xl bg-primary-600/30"></div>
         <div class="relative grid gap-6">
@@ -171,27 +165,15 @@
     </div>
   </section>
 
-  <!-- USER PERSONAS TEASER -->
+  <!-- USER PERSONAS -->
   <section id="personas" class="py-20 bg-slate-900/40 border-y border-white/10">
     <div class="mx-auto max-w-7xl px-6">
       <h2 class="font-display text-4xl font-extrabold">Built for real readers (manga style)</h2>
       <div class="mt-10 grid md:grid-cols-4 gap-6 text-sm">
-        <div class="panel rounded-2xl p-5">
-          <div class="font-semibold">Javier • 22</div>
-          <p class="mt-1 text-slate-300">Gets distracted with long texts. Loves anime. Wants visuals that keep him hooked.</p>
-        </div>
-        <div class="panel rounded-2xl p-5">
-          <div class="font-semibold">Marta • 38</div>
-          <p class="mt-1 text-slate-300">High school teacher. Needs inclusive tools to engage students in class.</p>
-        </div>
-        <div class="panel rounded-2xl p-5">
-          <div class="font-semibold">Diego • 16</div>
-          <p class="mt-1 text-slate-300">Dyslexia. Wants visual support to follow fantasy sagas with friends.</p>
-        </div>
-        <div class="panel rounded-2xl p-5">
-          <div class="font-semibold">Laura • 45</div>
-          <p class="mt-1 text-slate-300">Indie writer. Explores hybrid narratives and AI-generated illustrations.</p>
-        </div>
+        <div class="panel rounded-2xl p-5"><div class="font-semibold">Javier • 22</div><p class="mt-1 text-slate-300">Gets distracted with long texts. Loves anime. Wants visuals that keep him hooked.</p></div>
+        <div class="panel rounded-2xl p-5"><div class="font-semibold">Marta • 38</div><p class="mt-1 text-slate-300">High school teacher. Needs inclusive tools to engage students in class.</p></div>
+        <div class="panel rounded-2xl p-5"><div class="font-semibold">Diego • 16</div><p class="mt-1 text-slate-300">Dyslexia. Wants visual support to follow fantasy sagas with friends.</p></div>
+        <div class="panel rounded-2xl p-5"><div class="font-semibold">Laura • 45</div><p class="mt-1 text-slate-300">Indie writer. Explores hybrid narratives and AI-generated illustrations.</p></div>
       </div>
     </div>
   </section>
@@ -200,7 +182,6 @@
   <section id="gallery" class="py-20">
     <div class="mx-auto max-w-7xl px-6">
       <h2 class="font-display text-4xl font-extrabold">Visual inspiration</h2>
-      <p class="mt-2 text-slate-300">Inserta aquí tus URLs directas de imagen (.jpg/.png). Si no hay imagen, se muestra un placeholder.</p>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
         <div class="panel rounded-2xl overflow-hidden">
           <img id="gal1" alt="Hada/elfa del bosque" class="w-full h-56 object-cover hidden"/>
@@ -257,11 +238,9 @@
           <span id="formStatus" class="text-sm text-slate-400"></span>
         </div>
       </form>
-      <p class="mt-4 text-xs text-slate-500">Form posts to a configurable endpoint. See code comment below to set it when you have it.</p>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="py-10 text-center text-sm text-slate-400">
     <div class="mx-auto max-w-7xl px-6">
       <div>© <span id="year"></span> MangaPages — Lectura inmersiva con IA</div>
@@ -274,12 +253,10 @@
     const btn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
     btn?.addEventListener('click', ()=> mobileNav.classList.toggle('hidden'));
-
-    // YEAR
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ===== CONTACT FORM SUBMIT =====
-    const ENDPOINT_URL = ""; // Replace when you have your API endpoint
+    // ===== CONTACT FORM (mailto fallback) =====
+    const ENDPOINT_URL = "";
     const form = document.getElementById('leadForm');
     const statusEl = document.getElementById('formStatus');
     form.addEventListener('submit', async (e) => {
@@ -294,42 +271,58 @@
           statusEl.textContent = "No endpoint configured. Opened email client.";
           return;
         }
-        const res = await fetch(ENDPOINT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({...data, source:'landing-mangapages'}) });
-        if (!res.ok) throw new Error('Network response was not ok');
-        form.reset(); statusEl.textContent = "Thanks! We will contact you soon.";
+        const res = await fetch(ENDPOINT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,source:'landing-mangapages'})});
+        if(!res.ok) throw new Error('Network response was not ok');
+        form.reset(); statusEl.textContent="Thanks! We will contact you soon.";
       } catch (err) {
-        console.error(err);
-        statusEl.textContent = "Error sending. Please try again or email us directly.";
+        console.error(err); statusEl.textContent="Error sending. Please try again or email us directly.";
       }
     });
 
-    // ===== IMAGE SETUP (Rutas relativas directas) =====
-    const IMAGES = {
-      hero1: "cute-anime-fairy-girl.jpg",
-      hero2: "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
-      hero3: "anime-character-using-virtual-reality-glasses-metaverse.jpg",
-      gal1:  "cute-anime-fairy-girl.jpg",
-      gal2:  "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
-      gal3:  "anime-character-using-virtual-reality-glasses-metaverse.jpg",
+    // ===== IMAGE LOADER TOLERANTE (mismos archivos junto a index.html) =====
+    const candidates = {
+      fairy: [
+        "cute-anime-fairy-girl.jpg","cute-anime-fairy-girl.JPG","cute-anime-fairy-girl.jpeg"
+      ],
+      couple: [
+        "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
+        "anime-style-scene-with-people-showing-affection-outdoors-street.JPG",
+        "anime-style-scene-with-people-showing-affection-outdoors-street.jpeg"
+      ],
+      vr: [
+        "anime-character-using-virtual-reality-glasses-metaverse.jpg",
+        "anime-character-using-virtual-reality-glasses-metaverse-.jpg",
+        "anime-character-using-virtual-reality-glasses-metaverse.jpeg",
+        "anime-character-using-virtual-reality-glasses-metaverse (1).jpg",
+        "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg"
+      ]
     };
 
-    const applyImg = (id, url, phId) => {
-      if (!url) return;
-      const el = document.getElementById(id);
+    function tryLoad(id, list, phId){
+      const img = document.getElementById(id);
       const ph = phId ? document.getElementById(phId) : null;
-      el.onload = ()=> { el.classList.remove('hidden'); if (ph) ph.classList.add('hidden'); };
-      el.onerror = ()=> {
-        console.warn('Image failed to load:', url);
-        if (ph) { ph.classList.remove('hidden'); ph.innerHTML = `<span class="text-red-300 text-xs">Image not found: ${url}</span>`; }
+      let i = 0;
+      const attempt = () => {
+        if(i >= list.length){ // no match
+          if(ph){ ph.classList.remove('hidden'); ph.innerHTML = `<span class="text-red-300 text-xs">Image not found: ${list.join(' | ')}</span>`; }
+          return;
+        }
+        const url = list[i++];
+        img.onload = ()=>{ img.classList.remove('hidden'); if(ph) ph.classList.add('hidden'); };
+        img.onerror = ()=> attempt();
+        img.src = url;
       };
-      el.src = url;
-    };
-    applyImg('imgHero1', IMAGES.hero1);
-    applyImg('imgHero2', IMAGES.hero2);
-    applyImg('imgHero3', IMAGES.hero3);
-    applyImg('gal1', IMAGES.gal1, 'gal1ph');
-    applyImg('gal2', IMAGES.gal2, 'gal2ph');
-    applyImg('gal3', IMAGES.gal3, 'gal3ph');
+      attempt();
+    }
+
+    // Hero
+    tryLoad('imgHero1', candidates.fairy);
+    tryLoad('imgHero2', candidates.couple);
+    tryLoad('imgHero3', candidates.vr);
+    // Gallery
+    tryLoad('gal1', candidates.fairy, 'gal1ph');
+    tryLoad('gal2', candidates.couple, 'gal2ph');
+    tryLoad('gal3', candidates.vr, 'gal3ph');
   </script>
 </body>
 </html>
