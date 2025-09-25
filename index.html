@@ -54,9 +54,6 @@
 .speedlines:before{content:"";position:absolute;inset:-40% -20%;background:repeating-linear-gradient(75deg,rgba(255,255,255,.07)0 2px,transparent 2px 6px);transform:skewY(-8deg);pointer-events:none}
 .badge-onom{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .7rem;border:2px solid rgba(255,255,255,.2);border-radius:.75rem;background:rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.25)}
 .sticker{position:absolute;right:-8px;top:-10px;transform:rotate(6deg);font-weight:800}
-.tilt{transform-style:preserve-3d;transition:transform .3s ease}
-.tilt:hover{transform:perspective(800px) rotateX(4deg) rotateY(-4deg)}
-.sparkle{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.15),transparent 40%),radial-gradient(circle at 80% 20%,rgba(139,92,246,.22),transparent 40%),radial-gradient(circle at 60% 80%,rgba(245,158,11,.18),transparent 50%)}
 </style>
 </head>
 <body class="bg-ink text-slate-100 font-body">
@@ -91,12 +88,13 @@
   <section class="halftone speedlines relative isolate overflow-hidden">
     <div class="mx-auto max-w-7xl px-6 pt-20 pb-24 sm:pt-24 sm:pb-28 md:pt-28 md:pb-36 grid md:grid-cols-2 gap-10 items-center">
       <div>
-        <h1 class="relative font-display stroke-title text-5xl sm:text-6xl leading-tight">
-          <span class="text-white">Turn books</span> <span class="text-sakura">into anime</span> <span class="text-neon">as you read</span>
-          <span class="absolute -right-6 -top-6 rotate-6 text-sakura text-xl bg-white/10 px-3 py-1 rounded-lg border border-white/20">NEW!</span>
+        <h1 class="font-display stroke-title text-5xl sm:text-6xl leading-tight">
+          <span class="text-white">Read it.</span> <span class="text-sakura">See it.</span> <span class="text-neon">Feel it.</span>
         </h1>
-        <div class="badge-onom sticker text-sakura">KA‑POW!</div>
-        <p class="mt-5 text-slate-300 text-lg max-w-xl">MangaPages syncs your page with <strong>cinematic anime visuals</strong> — characters, settings and action beats generated in real time. Keep focus high, spark imagination, and enjoy a manga‑style companion for any PDF.</p>
+        <div class="badge-onom sticker text-sakura">KA-POW!</div>
+        <p class="mt-5 text-slate-300 text-lg max-w-xl">
+          Turn any book (PDF) into an <strong>immersive anime/manga visual journey</strong>. Real-time images alongside your reading — high focus, high vibes.
+        </p>
         <div class="mt-8 flex flex-wrap gap-4">
           <a href="#contact" class="px-6 py-3 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow">Request access</a>
           <a href="#how" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10">How it works</a>
@@ -104,31 +102,28 @@
         <div class="mt-8 text-xs text-slate-400">Contact: <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a></div>
       </div>
 
-      <!-- Manga panel stack (now supports real image URLs) -->
+      <!-- Manga panel stack (with your images) -->
       <div class="relative">
         <div class="absolute -top-8 -right-4 w-48 h-48 rounded-3xl blur-3xl bg-primary-600/30"></div>
-        <div class="relative grid gap-6 tilt">
-          <div class="sparkle"></div>
-          <!-- Each panel uses <img>. If no direct image URL is provided, a placeholder is shown. -->
+        <div class="relative grid gap-6">
           <div class="panel rounded-2xl p-3 manga-bg">
             <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero1" alt="Anime reference 1" class="w-full h-full object-cover hidden"/>
+              <img id="imgHero1" alt="Hada/elfa del bosque con orbes luminosos" class="w-full h-full object-cover hidden"/>
             </div>
-            <div class="mt-3 text-sm text-slate-300">VR anime vibe — hero art</div>
+            <div class="mt-3 text-sm text-slate-300">Forest spirit — ethereal glow</div>
           </div>
           <div class="panel rounded-2xl p-3 manga-bg">
             <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero2" alt="Anime reference 2" class="w-full h-full object-cover hidden"/>
+              <img id="imgHero2" alt="Pareja anime en calle iluminada por faroles" class="w-full h-full object-cover hidden"/>
             </div>
-            <div class="mt-3 text-sm text-slate-300">Reading under a tree — mood</div>
+            <div class="mt-3 text-sm text-slate-300">Winter date — warm lights</div>
           </div>
           <div class="panel rounded-2xl p-3 manga-bg">
             <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero3" alt="Anime reference 3" class="w-full h-full object-cover hidden"/>
+              <img id="imgHero3" alt="Chico con visor de realidad virtual entre paneles luminosos" class="w-full h-full object-cover hidden"/>
             </div>
-            <div class="mt-3 text-sm text-slate-300">Autumn artist — palette</div>
+            <div class="mt-3 text-sm text-slate-300">VR dreamscape — neon grids</div>
           </div>
-          
         </div>
       </div>
     </div>
@@ -137,27 +132,26 @@
   <!-- FEATURES -->
   <section id="features" class="py-20 bg-slate-900/40 border-t border-white/10">
     <div class="mx-auto max-w-7xl px-6">
-      <h2 class="font-display text-4xl font-extrabold">Why anime fans love MangaPages</h2>
-      <p class="mt-2 text-slate-300 max-w-3xl">Scene‑by‑scene visuals that respect the soul of the book and add pure anime energy.</p>
+      <h2 class="font-display text-4xl font-extrabold">Why readers love MangaPages</h2>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
-        <div class="panel rounded-2xl p-6 hover:translate-y-[-2px] transition">
-          <h3 class="font-semibold text-lg">🔥 Focus boost</h3>
-          <p class="mt-2 text-slate-300">Real‑time art matched to your current paragraph. Never lose the thread again.</p>
+        <div class="panel rounded-2xl p-6">
+          <h3 class="font-semibold text-lg">Focus & immersion</h3>
+          <p class="mt-2 text-slate-300">Real-time visuals that keep you engaged with characters and settings — no more losing the thread.</p>
         </div>
-        <div class="panel rounded-2xl p-6 hover:translate-y-[-2px] transition">
-          <h3 class="font-semibold text-lg">🎯 Inclusive</h3>
-          <p class="mt-2 text-slate-300">Visual cues help readers with dyslexia/ADHD, improving comprehension and recall.</p>
+        <div class="panel rounded-2xl p-6">
+          <h3 class="font-semibold text-lg">Inclusive reading</h3>
+          <p class="mt-2 text-slate-300">Visual support that helps learners with dyslexia/ADHD and boosts comprehension in the classroom.</p>
         </div>
-        <div class="panel rounded-2xl p-6 hover:translate-y-[-2px] transition">
-          <h3 class="font-semibold text-lg">🎨 Your vibe</h3>
-          <p class="mt-2 text-slate-300">Switch between anime, cinematic or comic styles. Keep imagination alive.</p>
+        <div class="panel rounded-2xl p-6">
+          <h3 class="font-semibold text-lg">Custom art styles</h3>
+          <p class="mt-2 text-slate-300">Choose anime, realistic or comic styles to match your vibe and the book’s tone.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
-  <section id="how" class="py-20"> class="py-20">
+  <section id="how" class="py-20">
     <div class="mx-auto max-w-7xl px-6">
       <h2 class="font-display text-4xl font-extrabold">How it works</h2>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
@@ -205,20 +199,23 @@
     </div>
   </section>
 
-  <!-- GALLERY (now uses <img> and JS-filled URLs) -->
+  <!-- GALLERY -->
   <section id="gallery" class="py-20">
     <div class="mx-auto max-w-7xl px-6">
       <h2 class="font-display text-4xl font-extrabold">Visual inspiration</h2>
-      <p class="mt-2 text-slate-300">Curated anime moods used across MangaPages. Perfectly cropped to 21:9.</p>
+      <p class="mt-2 text-slate-300">Inserta aquí tus URLs directas de imagen (.jpg/.png). Si no hay imagen, se muestra un placeholder.</p>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
-        <div class="panel rounded-2xl overflow-hidden hover:shadow-glow transition">
-          <div class="ratio ratio-21x9 img-placeholder" id="gal1ph"><img id="gal1" alt="VR immersion" class="hidden"/></div>
+        <div class="panel rounded-2xl overflow-hidden">
+          <img id="gal1" alt="Hada/elfa del bosque" class="w-full h-56 object-cover hidden"/>
+          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal1ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
         </div>
-        <div class="panel rounded-2xl overflow-hidden hover:shadow-glow transition">
-          <div class="ratio ratio-21x9 img-placeholder" id="gal2ph"><img id="gal2" alt="Romance street" class="hidden"/></div>
+        <div class="panel rounded-2xl overflow-hidden">
+          <img id="gal2" alt="Pareja anime en la ciudad" class="w-full h-56 object-cover hidden"/>
+          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal2ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
         </div>
-        <div class="panel rounded-2xl overflow-hidden hover:shadow-glow transition">
-          <div class="ratio ratio-21x9 img-placeholder" id="gal3ph"><img id="gal3" alt="Fantasy fairy" class="hidden"/></div>
+        <div class="panel rounded-2xl overflow-hidden">
+          <img id="gal3" alt="Visor de realidad virtual" class="w-full h-56 object-cover hidden"/>
+          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal3ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
         </div>
       </div>
     </div>
@@ -307,34 +304,25 @@
     });
 
     // ===== IMAGE SETUP =====
-    // ⚠️ The Freepik links you shared are HTML pages, not direct images, so they won't load as <img>.
-    // Put DIRECT .jpg/.png URLs below when you have them.
     // Build absolute base path for GitHub Pages (project pages live under /<user>.github.io/<repo>/)
     const BASE = (function(){
       const p = window.location.pathname;
-      // e.g. /MangaPages/ -> return '/MangaPages/';  / -> '/'
       return p.endsWith('/') ? p : p.slice(0, p.lastIndexOf('/')+1);
     })();
 
-    // Build absolute base path for GitHub Pages
-    const BASE = (function(){
-      const p = window.location.pathname; return p.endsWith('/') ? p : p.slice(0, p.lastIndexOf('/')+1);
-    })();
-
-    // Helper to safely build URLs even if file names contain spaces or parentheses
-    const VERSION = 'v3';
-    const makeURL = (name) => (BASE + encodeURIComponent(name).replace(/%2F/g,'/')) + `?${VERSION}`;
-
+    // Tus archivos en la misma carpeta del HTML
     const IMAGES = {
-      // New set you provided (cache‑busted with VERSION)
-      hero1: makeURL("anime-character-using-virtual-reality-glasses-metaverse (1).jpg"), // VR immersion
-      hero2: makeURL("anime-style-scene-with-people-showing-affection-outdoors-street.jpg"), // romantic street
-      hero3: makeURL("cute-anime-fairy-girl.jpg"), // fantasy fairy
-      gal1:  makeURL("anime-character-using-virtual-reality-glasses-metaverse (1).jpg"),
-      gal2:  makeURL("anime-style-scene-with-people-showing-affection-outdoors-street.jpg"),
-      gal3:  makeURL("cute-anime-fairy-girl.jpg"),
+      // 1) Hada/elfa del bosque
+      hero1: BASE + "cute-anime-fairy-girl.jpg",
+      // 2) Pareja en la calle con luces
+      hero2: BASE + "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
+      // 3) Visor VR (archivo con espacio+paréntesis => %20 y paréntesis tal cual)
+      hero3: BASE + "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg",
+      // Galería
+      gal1:  BASE + "cute-anime-fairy-girl.jpg",
+      gal2:  BASE + "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
+      gal3:  BASE + "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg",
     };
-    console.log('MangaPages image URLs:', IMAGES);
 
     const applyImg = (id, url, phId) => {
       if (!url) return;
@@ -343,7 +331,7 @@
       el.onload = ()=> { el.classList.remove('hidden'); if (ph) ph.classList.add('hidden'); };
       el.onerror = ()=> {
         console.warn('Image failed to load:', url);
-        if (ph) { ph.classList.remove('hidden'); ph.innerHTML = `<span class=\"text-red-300 text-xs\">Image not found: ${url}</span>`; }
+        if (ph) { ph.classList.remove('hidden'); ph.innerHTML = `<span class="text-red-300 text-xs">Image not found: ${url}</span>`; }
       };
       el.src = url;
     };
@@ -356,4 +344,3 @@
   </script>
 </body>
 </html>
-
