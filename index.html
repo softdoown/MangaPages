@@ -322,10 +322,11 @@
     })();
 
     // Helper to safely build URLs even if file names contain spaces or parentheses
-    const makeURL = (name) => BASE + encodeURIComponent(name).replace(/%2F/g,'/');
+    const VERSION = 'v3';
+    const makeURL = (name) => (BASE + encodeURIComponent(name).replace(/%2F/g,'/')) + `?${VERSION}`;
 
     const IMAGES = {
-      // New set you provided
+      // New set you provided (cache‑busted with VERSION)
       hero1: makeURL("anime-character-using-virtual-reality-glasses-metaverse (1).jpg"), // VR immersion
       hero2: makeURL("anime-style-scene-with-people-showing-affection-outdoors-street.jpg"), // romantic street
       hero3: makeURL("cute-anime-fairy-girl.jpg"), // fantasy fairy
@@ -333,6 +334,7 @@
       gal2:  makeURL("anime-style-scene-with-people-showing-affection-outdoors-street.jpg"),
       gal3:  makeURL("cute-anime-fairy-girl.jpg"),
     };
+    console.log('MangaPages image URLs:', IMAGES);
 
     const applyImg = (id, url, phId) => {
       if (!url) return;
@@ -354,3 +356,4 @@
   </script>
 </body>
 </html>
+
