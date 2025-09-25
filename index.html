@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MangaPages — Lectura inmersiva con IA</title>
+  <meta name="description" content="Convierte cualquier libro en una experiencia visual inmersiva con estética anime/manga. Imágenes generadas en tiempo real mientras lees." />
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ["Zen Maru Gothic", "M PLUS Rounded 1c", "ui-sans-serif", "system-ui"],
+            body: ["Inter", "ui-sans-serif", "system-ui"],
+          },
+          colors: {
+            primary: {500:'#8b5cf6',600:'#7c3aed',700:'#6d28d9'},
+            sakura: '#ff6ad5',
+            neon: '#f59e0b',
+            ink: '#0b1020',
+          },
+          boxShadow: {
+            glow: "0 0 0 3px rgba(255,255,255,0.18), 0 10px 30px rgba(139,92,246,.35)",
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Zen+Maru+Gothic:wght@600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Manga vibes */
+    .halftone {
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,106,213,.25) 0 30%, transparent 31%),
+        radial-gradient(circle at 80% 10%, rgba(139,92,246,.25) 0 28%, transparent 29%),
+        radial-gradient(circle at 70% 80%, rgba(245,158,11,.18) 0 22%, transparent 23%),
+        linear-gradient(180deg, #0b1020 0%, #0f172a 60%, #0b1020 100%);
+    }
+    .panel { backdrop-filter: blur(10px); background: rgba(255,255,255,.06); border: 2px solid rgba(255,255,255,.18); box-shadow: 0 8px 0 rgba(0,0,0,.25); }
+    .speech { position: relative; }
+    .speech:after { content: ""; position: absolute; left: 1.5rem; bottom: -12px; width: 16px; height: 16px; background: rgba(255,255,255,.06); border-left: 2px solid rgba(255,255,255,.18); border-bottom: 2px solid rgba(255,255,255,.18); transform: rotate(45deg); }
+    .stroke-title { text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000; }
+    .manga-bg { background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 10px, rgba(255,255,255,0) 10px 20px); }
+    .img-placeholder { background: radial-gradient(circle at 40% 40%, rgba(255,255,255,.08) 0 40%, transparent 41%), linear-gradient(135deg, rgba(139,92,246,.35), rgba(255,106,213,.25)); }
+  .speedlines{position:relative;overflow:hidden}
+.speedlines:before{content:"";position:absolute;inset:-40% -20%;background:repeating-linear-gradient(75deg,rgba(255,255,255,.07)0 2px,transparent 2px 6px);transform:skewY(-8deg);pointer-events:none}
+.badge-onom{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .7rem;border:2px solid rgba(255,255,255,.2);border-radius:.75rem;background:rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.25)}
+.sticker{position:absolute;right:-8px;top:-10px;transform:rotate(6deg);font-weight:800}
+</style>
+</head>
+<body class="bg-ink text-slate-100 font-body">
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-ink/80 backdrop-blur border-b border-white/10">
+    <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-600 to-sakura shadow-glow"></div>
+        <div class="font-display text-xl tracking-wide">MangaPages</div>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-slate-200">
+        <a href="#features" class="hover:text-white">Features</a>
+        <a href="#how" class="hover:text-white">How it works</a>
+        <a href="#personas" class="hover:text-white">User Personas</a>
+        <a href="#gallery" class="hover:text-white">Gallery</a>
+        <a href="#contact" class="px-4 py-2 rounded-xl bg-primary-600 hover:bg-primary-500 text-white shadow-glow">Get Early Access</a>
+      </nav>
+      <button id="menuBtn" class="md:hidden inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20">☰</button>
+    </div>
+    <div id="mobileNav" class="md:hidden hidden border-t border-white/10">
+      <nav class="px-6 py-4 space-y-3">
+        <a href="#features" class="block">Features</a>
+        <a href="#how" class="block">How it works</a>
+        <a href="#personas" class="block">User Personas</a>
+        <a href="#gallery" class="block">Gallery</a>
+        <a href="#contact" class="block">Get Early Access</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="halftone speedlines relative isolate overflow-hidden">
+    <div class="mx-auto max-w-7xl px-6 pt-20 pb-24 sm:pt-24 sm:pb-28 md:pt-28 md:pb-36 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="font-display stroke-title text-5xl sm:text-6xl leading-tight">
+          <span class="text-white">Read it.</span> <span class="text-sakura">See it.</span> <span class="text-neon">Feel it.</span>
+        </h1>
+        <div class="badge-onom sticker text-sakura">KA‑POW!</div>
+        <p class="mt-5 text-slate-300 text-lg max-w-xl">
+          Turn any book (PDF) into an <strong>immersive anime/manga visual journey</strong>. Real‑time images alongside your reading — high focus, high vibes.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="#contact" class="px-6 py-3 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow">Request access</a>
+          <a href="#how" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10">How it works</a>
+        </div>
+        <div class="mt-8 text-xs text-slate-400">Contact: <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a></div>
+      </div>
+
+      <!-- Manga panel stack (now supports real image URLs) -->
+      <div class="relative">
+        <div class="absolute -top-8 -right-4 w-48 h-48 rounded-3xl blur-3xl bg-primary-600/30"></div>
+        <div class="relative grid gap-6">
+          <!-- Each panel uses <img>. If no direct image URL is provided, a placeholder is shown. -->
+          <div class="panel rounded-2xl p-3 manga-bg">
+            <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
+              <img id="imgHero1" alt="Anime reference 1" class="w-full h-full object-cover hidden"/>
+            </div>
+            <div class="mt-3 text-sm text-slate-300">VR anime vibe — hero art</div>
+          </div>
+          <div class="panel rounded-2xl p-3 manga-bg">
+            <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
+              <img id="imgHero2" alt="Anime reference 2" class="w-full h-full object-cover hidden"/>
+            </div>
+            <div class="mt-3 text-sm text-slate-300">Reading under a tree — mood</div>
+          </div>
+          <div class="panel rounded-2xl p-3 manga-bg">
+            <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
+              <img id="imgHero3" alt="Anime reference 3" class="w-full h-full object-cover hidden"/>
+            </div>
+            <div class="mt-3 text-sm text-slate-300">Autumn artist — palette</div>
+          </div>
+          <p class="text-xs text-slate-500">Nota: las URLs de Freepik que pasaste son páginas HTML, no imágenes directas (.jpg/.png). Sustitúyelas por enlaces de imagen directos cuando los tengas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="py-20 bg-slate-900/40 border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-6">
+      <h2 class="font-display text-4xl font-extrabold">Why readers love MangaPages</h2>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="panel rounded-2xl p-6">
+          <h3 class="font-semibold text-lg">Focus & immersion</h3>
+          <p class="mt-2 text-slate-300">Real-time visuals that keep you engaged with characters and settings — no more losing the thread.</p>
+        </div>
+        <div class="panel rounded-2xl p-6">
+          <h3 class="font-semibold text-lg">Inclusive reading</h3>
+          <p class="mt-2 text-slate-300">Visual support that helps learners with dyslexia/ADHD and boosts comprehension in the classroom.</p>
+        </div>
+        <div class="panel rounded-2xl p-6">
+          <h3 class="font-semibold text-lg">Custom art styles</h3>
+          <p class="mt-2 text-slate-300">Choose anime, realistic or comic styles to match your vibe and the book’s tone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="py-20">
+    <div class="mx-auto max-w-7xl px-6">
+      <h2 class="font-display text-4xl font-extrabold">How it works</h2>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="panel rounded-2xl p-6">
+          <div class="text-neon text-2xl">01</div>
+          <h3 class="mt-2 font-semibold">Upload your PDF</h3>
+          <p class="mt-2 text-slate-300">We parse the text to identify scenes, characters and locations safely on device or private cloud.</p>
+        </div>
+        <div class="panel rounded-2xl p-6">
+          <div class="text-neon text-2xl">02</div>
+          <h3 class="mt-2 font-semibold">Generate visuals</h3>
+          <p class="mt-2 text-slate-300">AI creates scene images in the art style you choose, synced to your current reading position.</p>
+        </div>
+        <div class="panel rounded-2xl p-6">
+          <div class="text-neon text-2xl">03</div>
+          <h3 class="mt-2 font-semibold">Read & enjoy</h3>
+          <p class="mt-2 text-slate-300">Stay focused and inspired — visuals are optional, unobtrusive, and always under your control.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USER PERSONAS TEASER -->
+  <section id="personas" class="py-20 bg-slate-900/40 border-y border-white/10">
+    <div class="mx-auto max-w-7xl px-6">
+      <h2 class="font-display text-4xl font-extrabold">Built for real readers (manga style)</h2>
+      <div class="mt-10 grid md:grid-cols-4 gap-6 text-sm">
+        <div class="panel rounded-2xl p-5">
+          <div class="font-semibold">Javier • 22</div>
+          <p class="mt-1 text-slate-300">Gets distracted with long texts. Loves anime. Wants visuals that keep him hooked.</p>
+        </div>
+        <div class="panel rounded-2xl p-5">
+          <div class="font-semibold">Marta • 38</div>
+          <p class="mt-1 text-slate-300">High school teacher. Needs inclusive tools to engage students in class.</p>
+        </div>
+        <div class="panel rounded-2xl p-5">
+          <div class="font-semibold">Diego • 16</div>
+          <p class="mt-1 text-slate-300">Dyslexia. Wants visual support to follow fantasy sagas with friends.</p>
+        </div>
+        <div class="panel rounded-2xl p-5">
+          <div class="font-semibold">Laura • 45</div>
+          <p class="mt-1 text-slate-300">Indie writer. Explores hybrid narratives and AI-generated illustrations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY (now uses <img> and JS-filled URLs) -->
+  <section id="gallery" class="py-20">
+    <div class="mx-auto max-w-7xl px-6">
+      <h2 class="font-display text-4xl font-extrabold">Visual inspiration</h2>
+      <p class="mt-2 text-slate-300">Inserta aquí tus URLs directas de imagen (.jpg/.png). Si no hay imagen, se muestra un placeholder.</p>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="panel rounded-2xl overflow-hidden">
+          <img id="gal1" alt="Gallery 1" class="w-full h-56 object-cover hidden"/>
+          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal1ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
+        </div>
+        <div class="panel rounded-2xl overflow-hidden">
+          <img id="gal2" alt="Gallery 2" class="w-full h-56 object-cover hidden"/>
+          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal2ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
+        </div>
+        <div class="panel rounded-2xl overflow-hidden">
+          <img id="gal3" alt="Gallery 3" class="w-full h-56 object-cover hidden"/>
+          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal3ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-20 bg-slate-900/40 border-t border-white/10">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-display text-4xl font-extrabold">Request early access</h2>
+      <p class="mt-2 text-slate-300">Fill the form and we will reach out. Or email us directly at <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a>.</p>
+
+      <form id="leadForm" class="mt-8 panel rounded-2xl p-6 grid gap-5 speech">
+        <div class="grid md:grid-cols-2 gap-5">
+          <div>
+            <label class="text-sm">Full name</label>
+            <input required name="name" type="text" placeholder="Your name" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
+          </div>
+          <div>
+            <label class="text-sm">Email</label>
+            <input required name="email" type="email" placeholder="you@example.com" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
+          </div>
+        </div>
+        <div>
+          <label class="text-sm">Who are you?</label>
+          <select name="role" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
+            <option value="reader">Reader</option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+            <option value="creator">Writer/Creator</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm">Tell us about your use case</label>
+          <textarea name="message" rows="4" placeholder="What do you want to achieve with MangaPages?" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600"></textarea>
+        </div>
+        <label class="flex items-start gap-3 text-sm">
+          <input required type="checkbox" class="mt-1" />
+          <span>I agree to be contacted about early access and product updates.</span>
+        </label>
+        <div class="flex gap-4 items-center">
+          <button type="submit" class="px-6 py-3 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow">Send</button>
+          <span id="formStatus" class="text-sm text-slate-400"></span>
+        </div>
+      </form>
+      <p class="mt-4 text-xs text-slate-500">Form posts to a configurable endpoint. See code comment below to set it when you have it.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-10 text-center text-sm text-slate-400">
+    <div class="mx-auto max-w-7xl px-6">
+      <div>© <span id="year"></span> MangaPages — Lectura inmersiva con IA</div>
+      <div class="mt-2">Contact: <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== MOBILE NAV
+    const btn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    btn?.addEventListener('click', ()=> mobileNav.classList.toggle('hidden'));
+
+    // YEAR
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== CONTACT FORM SUBMIT =====
+    const ENDPOINT_URL = ""; // Replace when you have your API endpoint
+    const form = document.getElementById('leadForm');
+    const statusEl = document.getElementById('formStatus');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      statusEl.textContent = "Sending...";
+      const data = Object.fromEntries(new FormData(form).entries());
+      try {
+        if (!ENDPOINT_URL) {
+          const subject = encodeURIComponent('MangaPages — Early Access');
+          const body = encodeURIComponent(`Name: ${data.name}%0AEmail: ${data.email}%0ARole: ${data.role}%0AMessage: ${data.message}`);
+          window.location.href = `mailto:jesus@softdoown.com?subject=${subject}&body=${body}`;
+          statusEl.textContent = "No endpoint configured. Opened email client.";
+          return;
+        }
+        const res = await fetch(ENDPOINT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({...data, source:'landing-mangapages'}) });
+        if (!res.ok) throw new Error('Network response was not ok');
+        form.reset(); statusEl.textContent = "Thanks! We will contact you soon.";
+      } catch (err) { console.error(err); statusEl.textContent = "Error sending. Please try again or email us directly."; }
+    });
+
+    // ===== IMAGE SETUP =====
+    // ⚠️ The Freepik links you shared are HTML pages, not direct images, so they won't load as <img>.
+    // Put DIRECT .jpg/.png URLs below when you have them.
+    const IMAGES = {
+      hero1: "anime-character-using-virtual-reality-glasses-metaverse.jpg",
+      hero2: "anime-character-reading-book-tree-autumn.jpg",
+      hero3: "autumn-artist.jpg",
+      gal1:  "anime-character-using-virtual-reality-glasses-metaverse.jpg",
+      gal2:  "anime-character-reading-book-tree-autumn.jpg",
+      gal3:  "autumn-artist.jpg",
+    };
+
+    const applyImg = (id, url, phId) => {
+      if (!url) return;
+      const el = document.getElementById(id);
+      const ph = phId ? document.getElementById(phId) : null;
+      el.src = url; el.classList.remove('hidden'); if (ph) ph.classList.add('hidden');
+    };
+    applyImg('imgHero1', IMAGES.hero1);
+    applyImg('imgHero2', IMAGES.hero2);
+    applyImg('imgHero3', IMAGES.hero3);
+    applyImg('gal1', IMAGES.gal1, 'gal1ph');
+    applyImg('gal2', IMAGES.gal2, 'gal2ph');
+    applyImg('gal3', IMAGES.gal3, 'gal3ph');
+  </script>
+</body>
+</html>
