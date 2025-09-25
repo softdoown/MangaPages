@@ -54,6 +54,9 @@
 .speedlines:before{content:"";position:absolute;inset:-40% -20%;background:repeating-linear-gradient(75deg,rgba(255,255,255,.07)0 2px,transparent 2px 6px);transform:skewY(-8deg);pointer-events:none}
 .badge-onom{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .7rem;border:2px solid rgba(255,255,255,.2);border-radius:.75rem;background:rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.25)}
 .sticker{position:absolute;right:-8px;top:-10px;transform:rotate(6deg);font-weight:800}
+.tilt{transform-style:preserve-3d;transition:transform .3s ease}
+.tilt:hover{transform:perspective(800px) rotateX(4deg) rotateY(-4deg)}
+.sparkle{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.15),transparent 40%),radial-gradient(circle at 80% 20%,rgba(139,92,246,.22),transparent 40%),radial-gradient(circle at 60% 80%,rgba(245,158,11,.18),transparent 50%)}
 </style>
 </head>
 <body class="bg-ink text-slate-100 font-body">
@@ -88,13 +91,12 @@
   <section class="halftone speedlines relative isolate overflow-hidden">
     <div class="mx-auto max-w-7xl px-6 pt-20 pb-24 sm:pt-24 sm:pb-28 md:pt-28 md:pb-36 grid md:grid-cols-2 gap-10 items-center">
       <div>
-        <h1 class="font-display stroke-title text-5xl sm:text-6xl leading-tight">
-          <span class="text-white">Read it.</span> <span class="text-sakura">See it.</span> <span class="text-neon">Feel it.</span>
+        <h1 class="relative font-display stroke-title text-5xl sm:text-6xl leading-tight">
+          <span class="text-white">Turn books</span> <span class="text-sakura">into anime</span> <span class="text-neon">as you read</span>
+          <span class="absolute -right-6 -top-6 rotate-6 text-sakura text-xl bg-white/10 px-3 py-1 rounded-lg border border-white/20">NEW!</span>
         </h1>
         <div class="badge-onom sticker text-sakura">KA‑POW!</div>
-        <p class="mt-5 text-slate-300 text-lg max-w-xl">
-          Turn any book (PDF) into an <strong>immersive anime/manga visual journey</strong>. Real‑time images alongside your reading — high focus, high vibes.
-        </p>
+        <p class="mt-5 text-slate-300 text-lg max-w-xl">MangaPages syncs your page with <strong>cinematic anime visuals</strong> — characters, settings and action beats generated in real time. Keep focus high, spark imagination, and enjoy a manga‑style companion for any PDF.</p>
         <div class="mt-8 flex flex-wrap gap-4">
           <a href="#contact" class="px-6 py-3 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow">Request access</a>
           <a href="#how" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10">How it works</a>
@@ -105,7 +107,8 @@
       <!-- Manga panel stack (now supports real image URLs) -->
       <div class="relative">
         <div class="absolute -top-8 -right-4 w-48 h-48 rounded-3xl blur-3xl bg-primary-600/30"></div>
-        <div class="relative grid gap-6">
+        <div class="relative grid gap-6 tilt">
+          <div class="sparkle"></div>
           <!-- Each panel uses <img>. If no direct image URL is provided, a placeholder is shown. -->
           <div class="panel rounded-2xl p-3 manga-bg">
             <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
@@ -125,7 +128,7 @@
             </div>
             <div class="mt-3 text-sm text-slate-300">Autumn artist — palette</div>
           </div>
-          <p class="text-xs text-slate-500">Nota: las URLs de Freepik que pasaste son páginas HTML, no imágenes directas (.jpg/.png). Sustitúyelas por enlaces de imagen directos cuando los tengas.</p>
+          
         </div>
       </div>
     </div>
@@ -134,26 +137,27 @@
   <!-- FEATURES -->
   <section id="features" class="py-20 bg-slate-900/40 border-t border-white/10">
     <div class="mx-auto max-w-7xl px-6">
-      <h2 class="font-display text-4xl font-extrabold">Why readers love MangaPages</h2>
+      <h2 class="font-display text-4xl font-extrabold">Why anime fans love MangaPages</h2>
+      <p class="mt-2 text-slate-300 max-w-3xl">Scene‑by‑scene visuals that respect the soul of the book and add pure anime energy.</p>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
-        <div class="panel rounded-2xl p-6">
-          <h3 class="font-semibold text-lg">Focus & immersion</h3>
-          <p class="mt-2 text-slate-300">Real-time visuals that keep you engaged with characters and settings — no more losing the thread.</p>
+        <div class="panel rounded-2xl p-6 hover:translate-y-[-2px] transition">
+          <h3 class="font-semibold text-lg">🔥 Focus boost</h3>
+          <p class="mt-2 text-slate-300">Real‑time art matched to your current paragraph. Never lose the thread again.</p>
         </div>
-        <div class="panel rounded-2xl p-6">
-          <h3 class="font-semibold text-lg">Inclusive reading</h3>
-          <p class="mt-2 text-slate-300">Visual support that helps learners with dyslexia/ADHD and boosts comprehension in the classroom.</p>
+        <div class="panel rounded-2xl p-6 hover:translate-y-[-2px] transition">
+          <h3 class="font-semibold text-lg">🎯 Inclusive</h3>
+          <p class="mt-2 text-slate-300">Visual cues help readers with dyslexia/ADHD, improving comprehension and recall.</p>
         </div>
-        <div class="panel rounded-2xl p-6">
-          <h3 class="font-semibold text-lg">Custom art styles</h3>
-          <p class="mt-2 text-slate-300">Choose anime, realistic or comic styles to match your vibe and the book’s tone.</p>
+        <div class="panel rounded-2xl p-6 hover:translate-y-[-2px] transition">
+          <h3 class="font-semibold text-lg">🎨 Your vibe</h3>
+          <p class="mt-2 text-slate-300">Switch between anime, cinematic or comic styles. Keep imagination alive.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
-  <section id="how" class="py-20">
+  <section id="how" class="py-20"> class="py-20">
     <div class="mx-auto max-w-7xl px-6">
       <h2 class="font-display text-4xl font-extrabold">How it works</h2>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
@@ -205,19 +209,16 @@
   <section id="gallery" class="py-20">
     <div class="mx-auto max-w-7xl px-6">
       <h2 class="font-display text-4xl font-extrabold">Visual inspiration</h2>
-      <p class="mt-2 text-slate-300">Inserta aquí tus URLs directas de imagen (.jpg/.png). Si no hay imagen, se muestra un placeholder.</p>
+      <p class="mt-2 text-slate-300">Curated anime moods used across MangaPages. Perfectly cropped to 21:9.</p>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
-        <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal1" alt="Gallery 1" class="w-full h-56 object-cover hidden"/>
-          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal1ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
+        <div class="panel rounded-2xl overflow-hidden hover:shadow-glow transition">
+          <div class="ratio ratio-21x9 img-placeholder" id="gal1ph"><img id="gal1" alt="VR immersion" class="hidden"/></div>
         </div>
-        <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal2" alt="Gallery 2" class="w-full h-56 object-cover hidden"/>
-          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal2ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
+        <div class="panel rounded-2xl overflow-hidden hover:shadow-glow transition">
+          <div class="ratio ratio-21x9 img-placeholder" id="gal2ph"><img id="gal2" alt="Romance street" class="hidden"/></div>
         </div>
-        <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal3" alt="Gallery 3" class="w-full h-56 object-cover hidden"/>
-          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal3ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
+        <div class="panel rounded-2xl overflow-hidden hover:shadow-glow transition">
+          <div class="ratio ratio-21x9 img-placeholder" id="gal3ph"><img id="gal3" alt="Fantasy fairy" class="hidden"/></div>
         </div>
       </div>
     </div>
@@ -315,13 +316,22 @@
       return p.endsWith('/') ? p : p.slice(0, p.lastIndexOf('/')+1);
     })();
 
+    // Build absolute base path for GitHub Pages
+    const BASE = (function(){
+      const p = window.location.pathname; return p.endsWith('/') ? p : p.slice(0, p.lastIndexOf('/')+1);
+    })();
+
+    // Helper to safely build URLs even if file names contain spaces or parentheses
+    const makeURL = (name) => BASE + encodeURIComponent(name).replace(/%2F/g,'/');
+
     const IMAGES = {
-      hero1: BASE + "anime-character-using-virtual-reality-glasses-metaverse.jpg",
-      hero2: BASE + "anime-character-reading-book-tree-autumn.jpg",
-      hero3: BASE + "autumn-artist.jpg",
-      gal1:  BASE + "anime-character-using-virtual-reality-glasses-metaverse.jpg",
-      gal2:  BASE + "anime-character-reading-book-tree-autumn.jpg",
-      gal3:  BASE + "autumn-artist.jpg",
+      // New set you provided
+      hero1: makeURL("anime-character-using-virtual-reality-glasses-metaverse (1).jpg"), // VR immersion
+      hero2: makeURL("anime-style-scene-with-people-showing-affection-outdoors-street.jpg"), // romantic street
+      hero3: makeURL("cute-anime-fairy-girl.jpg"), // fantasy fairy
+      gal1:  makeURL("anime-character-using-virtual-reality-glasses-metaverse (1).jpg"),
+      gal2:  makeURL("anime-style-scene-with-people-showing-affection-outdoors-street.jpg"),
+      gal3:  makeURL("cute-anime-fairy-girl.jpg"),
     };
 
     const applyImg = (id, url, phId) => {
