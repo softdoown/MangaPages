@@ -22,9 +22,7 @@
             neon: '#f59e0b',
             ink: '#0b1020',
           },
-          boxShadow: {
-            glow: "0 0 0 3px rgba(255,255,255,0.18), 0 10px 30px rgba(139,92,246,.35)",
-          }
+          boxShadow: { glow: "0 0 0 3px rgba(255,255,255,0.18), 0 10px 30px rgba(139,92,246,.35)" }
         }
       }
     }
@@ -36,25 +34,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Zen+Maru+Gothic:wght@600;800&display=swap" rel="stylesheet">
 
   <style>
-    /* Manga vibes */
-    .halftone {
+    .halftone{
       background-image:
         radial-gradient(circle at 20% 20%, rgba(255,106,213,.25) 0 30%, transparent 31%),
         radial-gradient(circle at 80% 10%, rgba(139,92,246,.25) 0 28%, transparent 29%),
         radial-gradient(circle at 70% 80%, rgba(245,158,11,.18) 0 22%, transparent 23%),
         linear-gradient(180deg, #0b1020 0%, #0f172a 60%, #0b1020 100%);
     }
-    .panel { backdrop-filter: blur(10px); background: rgba(255,255,255,.06); border: 2px solid rgba(255,255,255,.18); box-shadow: 0 8px 0 rgba(0,0,0,.25); }
-    .speech { position: relative; }
-    .speech:after { content: ""; position: absolute; left: 1.5rem; bottom: -12px; width: 16px; height: 16px; background: rgba(255,255,255,.06); border-left: 2px solid rgba(255,255,255,.18); border-bottom: 2px solid rgba(255,255,255,.18); transform: rotate(45deg); }
-    .stroke-title { text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000; }
-    .manga-bg { background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 10px, rgba(255,255,255,0) 10px 20px); }
-    .img-placeholder { background: radial-gradient(circle at 40% 40%, rgba(255,255,255,.08) 0 40%, transparent 41%), linear-gradient(135deg, rgba(139,92,246,.35), rgba(255,106,213,.25)); }
-  .speedlines{position:relative;overflow:hidden}
-.speedlines:before{content:"";position:absolute;inset:-40% -20%;background:repeating-linear-gradient(75deg,rgba(255,255,255,.07)0 2px,transparent 2px 6px);transform:skewY(-8deg);pointer-events:none}
-.badge-onom{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .7rem;border:2px solid rgba(255,255,255,.2);border-radius:.75rem;background:rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.25)}
-.sticker{position:absolute;right:-8px;top:-10px;transform:rotate(6deg);font-weight:800}
-</style>
+    .panel{backdrop-filter:blur(10px);background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.18);box-shadow:0 8px 0 rgba(0,0,0,.25)}
+    .speech{position:relative}
+    .speech:after{content:"";position:absolute;left:1.5rem;bottom:-12px;width:16px;height:16px;background:rgba(255,255,255,.06);border-left:2px solid rgba(255,255,255,.18);border-bottom:2px solid rgba(255,255,255,.18);transform:rotate(45deg)}
+    .stroke-title{text-shadow:2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000}
+    .manga-bg{background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 10px, rgba(255,255,255,0) 10px 20px)}
+    .img-placeholder{background:radial-gradient(circle at 40% 40%, rgba(255,255,255,.08) 0 40%, transparent 41%),linear-gradient(135deg, rgba(139,92,246,.35), rgba(255,106,213,.25))}
+    .speedlines{position:relative;overflow:hidden}
+    .speedlines:before{content:"";position:absolute;inset:-40% -20%;background:repeating-linear-gradient(75deg,rgba(255,255,255,.07)0 2px,transparent 2px 6px);transform:skewY(-8deg);pointer-events:none}
+    .badge-onom{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .7rem;border:2px solid rgba(255,255,255,.2);border-radius:.75rem;background:rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.25)}
+    .sticker{position:absolute;right:-8px;top:-10px;transform:rotate(6deg);font-weight:800}
+  </style>
 </head>
 <body class="bg-ink text-slate-100 font-body">
   <!-- HEADER -->
@@ -300,28 +297,20 @@
         const res = await fetch(ENDPOINT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({...data, source:'landing-mangapages'}) });
         if (!res.ok) throw new Error('Network response was not ok');
         form.reset(); statusEl.textContent = "Thanks! We will contact you soon.";
-      } catch (err) { console.error(err); statusEl.textContent = "Error sending. Please try again or email us directly."; }
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = "Error sending. Please try again or email us directly.";
+      }
     });
 
-    // ===== IMAGE SETUP =====
-    // Build absolute base path for GitHub Pages (project pages live under /<user>.github.io/<repo>/)
-    const BASE = (function(){
-      const p = window.location.pathname;
-      return p.endsWith('/') ? p : p.slice(0, p.lastIndexOf('/')+1);
-    })();
-
-    // Tus archivos en la misma carpeta del HTML
+    // ===== IMAGE SETUP (Rutas relativas directas) =====
     const IMAGES = {
-      // 1) Hada/elfa del bosque
-      hero1: BASE + "cute-anime-fairy-girl.jpg",
-      // 2) Pareja en la calle con luces
-      hero2: BASE + "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
-      // 3) Visor VR (archivo con espacio+paréntesis => %20 y paréntesis tal cual)
-      hero3: BASE + "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg",
-      // Galería
-      gal1:  BASE + "cute-anime-fairy-girl.jpg",
-      gal2:  BASE + "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
-      gal3:  BASE + "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg",
+      hero1: "cute-anime-fairy-girl.jpg",
+      hero2: "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
+      hero3: "anime-character-using-virtual-reality-glasses-metaverse.jpg",
+      gal1:  "cute-anime-fairy-girl.jpg",
+      gal2:  "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
+      gal3:  "anime-character-using-virtual-reality-glasses-metaverse.jpg",
     };
 
     const applyImg = (id, url, phId) => {
