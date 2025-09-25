@@ -308,20 +308,32 @@
     // ===== IMAGE SETUP =====
     // ⚠️ The Freepik links you shared are HTML pages, not direct images, so they won't load as <img>.
     // Put DIRECT .jpg/.png URLs below when you have them.
+    // Build absolute base path for GitHub Pages (project pages live under /<user>.github.io/<repo>/)
+    const BASE = (function(){
+      const p = window.location.pathname;
+      // e.g. /MangaPages/ -> return '/MangaPages/';  / -> '/'
+      return p.endsWith('/') ? p : p.slice(0, p.lastIndexOf('/')+1);
+    })();
+
     const IMAGES = {
-      hero1: "anime-character-using-virtual-reality-glasses-metaverse.jpg",
-      hero2: "anime-character-reading-book-tree-autumn.jpg",
-      hero3: "autumn-artist.jpg",
-      gal1:  "anime-character-using-virtual-reality-glasses-metaverse.jpg",
-      gal2:  "anime-character-reading-book-tree-autumn.jpg",
-      gal3:  "autumn-artist.jpg",
+      hero1: BASE + "anime-character-using-virtual-reality-glasses-metaverse.jpg",
+      hero2: BASE + "anime-character-reading-book-tree-autumn.jpg",
+      hero3: BASE + "autumn-artist.jpg",
+      gal1:  BASE + "anime-character-using-virtual-reality-glasses-metaverse.jpg",
+      gal2:  BASE + "anime-character-reading-book-tree-autumn.jpg",
+      gal3:  BASE + "autumn-artist.jpg",
     };
 
     const applyImg = (id, url, phId) => {
       if (!url) return;
       const el = document.getElementById(id);
       const ph = phId ? document.getElementById(phId) : null;
-      el.src = url; el.classList.remove('hidden'); if (ph) ph.classList.add('hidden');
+      el.onload = ()=> { el.classList.remove('hidden'); if (ph) ph.classList.add('hidden'); };
+      el.onerror = ()=> {
+        console.warn('Image failed to load:', url);
+        if (ph) { ph.classList.remove('hidden'); ph.innerHTML = `<span class=\"text-red-300 text-xs\">Image not found: ${url}</span>`; }
+      };
+      el.src = url;
     };
     applyImg('imgHero1', IMAGES.hero1);
     applyImg('imgHero2', IMAGES.hero2);
