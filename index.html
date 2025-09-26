@@ -54,6 +54,7 @@
     .badge-onom{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .7rem;border:2px solid rgba(255,255,255,.2);border-radius:.75rem;background:rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.25)}
     .sticker{position:absolute;right:-8px;top:-10px;transform:rotate(6deg);font-weight:800}
     .kbd{border:1px solid rgba(255,255,255,.22);border-bottom-width:3px;border-radius:.5rem;padding:.1rem .4rem;background:rgba(255,255,255,.06)}
+    .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .55rem;border:1px solid rgba(255,255,255,.18);border-radius:.7rem;background:rgba(255,255,255,.06)}
   </style>
 
   <!-- schema.org -->
@@ -205,8 +206,36 @@
 
       <!-- Provider config -->
       <div class="mt-6 panel rounded-2xl p-6">
-        <div class="grid md:grid-cols-3 gap-6 text-sm">$1</div>
+        <div class="grid md:grid-cols-3 gap-6 text-sm">
+          <div>
+            <div class="font-semibold mb-2">Provider</div>
+            <label class="flex items-center gap-2 mb-2"><input type="radio" name="prov" value="hf" checked> Hugging Face Space</label>
+            <label class="flex items-center gap-2 mb-2"><input type="radio" name="prov" value="openai"> OpenAI (via proxy)</label>
+            <label class="flex items-center gap-2 mb-2"><input id="provLocal" type="radio" name="prov" value="local"> Local (WebGPU, beta)
+              <span id="localBadge" class="ml-2 pill text-xs hidden">checking…</span>
+            </label>
+          </div>
+          <div>
+            <div class="font-semibold mb-2">Hugging Face Space URL</div>
+            <input id="hfUrl" type="url" placeholder="https://&lt;name&gt;.hf.space" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
+            <p class="text-xs text-slate-400 mt-2">Tip: use a public Gradio Space with a single prompt field. You can Duplicate a Space to your account if CORS blocks.</p>
+          </div>
+          <div>
+            <div class="font-semibold mb-2">OpenAI proxy URL (optional)</div>
+            <input id="openaiUrl" type="url" placeholder="https://your-project.vercel.app/api/generate-image" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
+            <p class="text-xs text-slate-400 mt-2">Use this if you have an OpenAI API key on a serverless function.</p>
+          </div>
+        </div>
         <div class="mt-3 text-xs text-slate-400">Your settings are saved locally (browser only). For <strong>Local (WebGPU)</strong>: needs a modern Chrome/Edge with WebGPU enabled and enough VRAM. First run downloads model weights and can take a while.</div>
+
+        <!-- Diagnostics -->
+        <div class="mt-4 border-t border-white/10 pt-4 text-sm">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <div class="font-semibold">Diagnostics</div>
+            <button id="diagBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-xs">Run diagnostics</button>
+          </div>
+          <ul id="diagLog" class="mt-2 space-y-1 text-slate-300 text-xs"></ul>
+        </div>
       </div>
 
       <div class="mt-8 grid lg:grid-cols-3 gap-6">
@@ -490,6 +519,8 @@ negative: <artifacts to avoid>.</pre>
     const genSkeleton = document.getElementById('genSkeleton');
 
     const provInputs = document.querySelectorAll('input[name="prov"]');
+    const provLocal = document.getElementById('provLocal');
+    const localBadge = document.getElementById('localBadge');
     const hfUrl = document.getElementById('hfUrl');
     const openaiUrl = document.getElementById('openaiUrl');
 
@@ -513,8 +544,7 @@ negative: <artifacts to avoid>.</pre>
 
     function buildPrompt(){
       const base = `${desc.value || 'anime scene'} — style ${style.value}, ${framing.value}, lighting ${light.value}, palette ${palette.value}, finish ${ink.value}, cinematic depth of field, rule‑of‑thirds composition, subtle speed lines, sparkling particles, high detail, anatomical coherence, character consistency.`;
-      const neg = negative.value ? `
-negative: ${negative.value}.` : '';
+      const neg = negative.value ? `\nnegative: ${negative.value}.` : '';
       out.value = base + neg;
     }
     [desc, style, framing, light, palette, ink, negative].forEach(el=> el.addEventListener('input', buildPrompt));
@@ -540,47 +570,58 @@ negative: ${negative.value}.` : '';
     });
 
     // === Providers ===
+    // Helper: soft-check WebGPU
+    function supportsWebGPU(){ return 'gpu' in navigator; }
+
     // Local (WebGPU) — experimental loader (MLC / Web Stable Diffusion)
-    // We'll try to lazy‑load a browser SD pipeline. First run may take time to fetch weights.
+    // Graceful: never throw fatally; guide the user & fall back.
     let _localSD = null;
     async function ensureLocalModel(){
-      if(!('gpu' in navigator)) throw new Error('WebGPU is not available in this browser. Try Chrome/Edge latest on desktop and enable chrome://flags/#enable-unsafe-webgpu if needed.');
+      if(!supportsWebGPU()){
+        return null; // no WebGPU; caller will handle fallback/UX
+      }
       if(_localSD) return _localSD;
-      genStatus.textContent = 'Loading local model (first run downloads weights)…';
-      // Attempt 1: MLC web-stable-diffusion (browser bundle)
       try{
+        localBadge.classList.remove('hidden');
+        localBadge.textContent = 'loading…';
+        // Attempt to load a browser SD pipeline (MLC). Different CDNs may work; handle failure gracefully.
         if(!window.websd){
-          await import('https://cdn.jsdelivr.net/npm/@mlc-ai/web-stable-diffusion@0.1.8/dist/index.browser.js');
+          // try jsDelivr first
+          try{
+            await import('https://cdn.jsdelivr.net/npm/@mlc-ai/web-stable-diffusion@0.1.8/dist/index.browser.js');
+          }catch(e){
+            // fallback to unpkg/esm if needed
+            try{ await import('https://unpkg.com/@mlc-ai/web-stable-diffusion@0.1.8/dist/index.browser.js'); }catch(_){ /* ignore */ }
+          }
         }
         if(window.websd){
-          // create a light pipeline (turbo) if available, otherwise default
           _localSD = await window.websd.createPipeline?.({
-            model: 'stabilityai/stable-diffusion-2-1', // fallback; actual availability depends on CDN packs
+            model: 'stabilityai/stable-diffusion-2-1',
             scheduler: 'lcm',
-            dtype: 'q4f16' // quantized for smaller memory
+            dtype: 'q4f16'
           }) || window.websd;
+          localBadge.textContent = 'ready';
           return _localSD;
         }
       }catch(e){ console.warn('MLC load failed', e); }
-
-      throw new Error('Could not initialize a local WebGPU model automatically.');
+      localBadge.textContent = 'unavailable';
+      return null;
     }
 
     async function generateViaLocal(prompt){
       const sd = await ensureLocalModel();
-      // Different builds expose different APIs; try common ones in order.
-      // 1) websd.generate(prompt, opts)
+      if(!sd) throw new Error('WebGPU not available or local model unavailable.');
       if(typeof sd.generate === 'function'){
         const img = await sd.generate(prompt, { steps: 6, guidance_scale: 1.5, width: 512, height: 512 });
         return (typeof img === 'string') ? img : img?.data || img?.url;
       }
-      // 2) sd.txt2img(prompt, opts)
       if(typeof sd.txt2img === 'function'){
         const img = await sd.txt2img({ prompt, num_inference_steps: 6, guidance_scale: 1.5, width: 512, height: 512 });
         return (typeof img === 'string') ? img : img?.data || img?.url;
       }
       throw new Error('Local model loaded but no compatible API was found.');
     }
+
     async function generateViaOpenAI(prompt){
       const url = openaiUrl.value.trim();
       if(!url){ throw new Error('OpenAI proxy URL not configured'); }
@@ -619,12 +660,27 @@ negative: ${negative.value}.` : '';
       const prompt = out.value.trim();
       if(!prompt){ genStatus.textContent = 'Write a prompt first.'; return; }
       const provider = [...provInputs].find(r=>r.checked)?.value || 'hf';
+
       genBtn.disabled = true; genBtn.textContent = 'Generating…';
-      genStatus.textContent = provider==='hf' ? 'Calling Hugging Face Space…' : 'Contacting OpenAI proxy…';
+      genStatus.textContent = (provider==='hf')
+        ? 'Calling Hugging Face Space…'
+        : (provider==='openai' ? 'Contacting OpenAI proxy…' : 'Initializing local WebGPU model…');
       try{
         let src;
-        if(provider==='hf') src = await generateViaHuggingFace(prompt);
-        else src = await generateViaOpenAI(prompt);
+        if(provider==='hf') {
+          src = await generateViaHuggingFace(prompt);
+        } else if(provider==='openai') {
+          src = await generateViaOpenAI(prompt);
+        } else if(provider==='local') {
+          // If WebGPU is missing, inform and soft‑fail
+          if(!supportsWebGPU()){
+            genStatus.textContent = 'WebGPU is not available in this browser. Use Hugging Face or OpenAI.';
+            return; // graceful
+          }
+          src = await generateViaLocal(prompt);
+        } else {
+          throw new Error('Unknown provider: '+provider);
+        }
         if(!src) throw new Error('No image in response');
         genPreview.src = src;
         genPreview.classList.remove('hidden');
@@ -632,7 +688,7 @@ negative: ${negative.value}.` : '';
         genStatus.textContent = 'Done.';
       }catch(err){
         console.error(err);
-        genStatus.textContent = 'Generation failed. See console (CORS or format).';
+        genStatus.textContent = (err?.message || 'Generation failed') + '. See console (CORS or format).';
       }finally{
         genBtn.disabled = false; genBtn.textContent = 'Generate image';
       }
@@ -664,7 +720,49 @@ negative: ${negative.value}.` : '';
         desc.focus();
       }
     });
+
+    // ===== Init: adapt UI to WebGPU support & simple tests =====
+    (function initProviderUI(){
+      if(!provLocal) return;
+      if(!supportsWebGPU()){
+        provLocal.disabled = true;
+        const lbl = provLocal.parentElement;
+        const warn = document.createElement('span');
+        warn.className = 'ml-2 text-xs text-slate-400';
+        warn.textContent = '(not supported in this browser)';
+        lbl.appendChild(warn);
+      } else {
+        localBadge.classList.remove('hidden');
+        localBadge.textContent = 'WebGPU ✓';
+      }
+    })();
+
+    // Diagnostics runner ("test cases")
+    const diagBtn = document.getElementById('diagBtn');
+    const diagLog = document.getElementById('diagLog');
+    function logDiag(msg, ok){
+      const li = document.createElement('li');
+      li.innerHTML = ok ? `✅ ${msg}` : `❌ ${msg}`;
+      diagLog.appendChild(li);
+    }
+    diagBtn?.addEventListener('click', async ()=>{
+      diagLog.innerHTML = '';
+      // Test 1: WebGPU presence
+      logDiag('WebGPU present in navigator: ' + (supportsWebGPU() ? 'yes' : 'no'), supportsWebGPU());
+      // Test 2: HF URL looks valid
+      const hfValid = /^https?:\/\/.+\.hf\.space(\/.*)?$/.test((hfUrl.value||'').trim());
+      logDiag('HF Space URL format valid: ' + (hfValid ? 'yes' : 'no'), hfValid);
+      // Test 3: OpenAI proxy URL looks valid
+      const oaValid = /^https?:\/\//.test((openaiUrl.value||'').trim()) || !openaiUrl.value;
+      logDiag('OpenAI proxy URL format valid (or empty): ' + (oaValid ? 'yes' : 'no'), oaValid);
+      // Test 4: Try to init local model lightly (won't throw fatally)
+      try{
+        const sd = await ensureLocalModel();
+        logDiag('Local model initializable: ' + (sd ? 'yes' : 'no'), !!sd);
+      }catch(e){
+        logDiag('Local model initializable: no', false);
+      }
+    });
   </script>
 </body>
 </html>
-
