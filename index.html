@@ -1,18 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MangaPages — Turn any book into anime (real‑time AI)</title>
-  <meta name="description" content="Transform any book into an anime/manga experience. Real‑time images while you read. Prompt Studio included." />
-  <meta name="theme-color" content="#0b1020" />
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="MangaPages — Turn any book into anime" />
-  <meta property="og:description" content="Immersive reading with anime/manga visuals generated in real time. Includes a Prompt Studio for perfect outputs." />
-  <meta property="og:image" content="cover-mangapages.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <title>MangaPages — Lectura inmersiva con IA</title>
+  <meta name="description" content="Convierte cualquier libro en una experiencia visual inmersiva con estética anime/manga. Imágenes generadas en tiempo real mientras lees." />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -25,7 +17,7 @@
           },
           colors: {
             primary: {500:'#8b5cf6',600:'#7c3aed',700:'#6d28d9'},
-            sakura: '#ff6ad5', neon: '#f59e0b', ink: '#0b1020', aqua:'#67e8f9'
+            sakura: '#ff6ad5', neon: '#f59e0b', ink: '#0b1020',
           },
           boxShadow: { glow:"0 0 0 3px rgba(255,255,255,0.18), 0 10px 30px rgba(139,92,246,.35)" }
         }
@@ -53,47 +45,32 @@
     .speedlines:before{content:"";position:absolute;inset:-40% -20%;background:repeating-linear-gradient(75deg,rgba(255,255,255,.07) 0 2px,transparent 2px 6px);transform:skewY(-8deg);pointer-events:none}
     .badge-onom{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .7rem;border:2px solid rgba(255,255,255,.2);border-radius:.75rem;background:rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.25)}
     .sticker{position:absolute;right:-8px;top:-10px;transform:rotate(6deg);font-weight:800}
-    .kbd{border:1px solid rgba(255,255,255,.22);border-bottom-width:3px;border-radius:.5rem;padding:.1rem .4rem;background:rgba(255,255,255,.06)}
-    .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .55rem;border:1px solid rgba(255,255,255,.18);border-radius:.7rem;background:rgba(255,255,255,.06)}
   </style>
-
-  <!-- schema.org -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"MangaPages",
-    "applicationCategory":"Reading",
-    "operatingSystem":"Web",
-    "description":"Immersive reading with anime/manga visuals generated in real time",
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}
-  }
-  </script>
 </head>
 <body class="bg-ink text-slate-100 font-body">
   <!-- HEADER -->
   <header class="sticky top-0 z-40 bg-ink/80 backdrop-blur border-b border-white/10">
     <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3" aria-label="MangaPages home">
+      <a href="#" class="flex items-center gap-3">
         <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-600 to-sakura shadow-glow"></div>
         <div class="font-display text-xl tracking-wide">MangaPages</div>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm text-slate-200">
         <a href="#features" class="hover:text-white">Features</a>
         <a href="#how" class="hover:text-white">How it works</a>
-        <a href="#prompts" class="hover:text-white">Prompt Studio</a>
+        <a href="#personas" class="hover:text-white">User Personas</a>
         <a href="#gallery" class="hover:text-white">Gallery</a>
-        <a href="#contact" class="px-4 py-2 rounded-xl bg-primary-600 hover:bg-primary-500 text-white shadow-glow">Get early access</a>
+        <a href="#contact" class="px-4 py-2 rounded-xl bg-primary-600 hover:bg-primary-500 text-white shadow-glow">Get Early Access</a>
       </nav>
-      <button id="menuBtn" class="md:hidden inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20" aria-expanded="false" aria-controls="mobileNav">☰</button>
+      <button id="menuBtn" class="md:hidden inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20">☰</button>
     </div>
     <div id="mobileNav" class="md:hidden hidden border-t border-white/10">
       <nav class="px-6 py-4 space-y-3">
         <a href="#features" class="block">Features</a>
         <a href="#how" class="block">How it works</a>
-        <a href="#prompts" class="block">Prompt Studio</a>
+        <a href="#personas" class="block">User Personas</a>
         <a href="#gallery" class="block">Gallery</a>
-        <a href="#contact" class="block">Get early access</a>
+        <a href="#contact" class="block">Get Early Access</a>
       </nav>
     </div>
   </header>
@@ -105,41 +82,36 @@
         <h1 class="font-display stroke-title text-5xl sm:text-6xl leading-tight">
           <span class="text-white">Read it.</span> <span class="text-sakura">See it.</span> <span class="text-neon">Feel it.</span>
         </h1>
-        <div class="badge-onom sticker text-sakura">BAM!</div>
+        <div class="badge-onom sticker text-sakura">KA-POW!</div>
         <p class="mt-5 text-slate-300 text-lg max-w-xl">
-          Turn any book (PDF) into an <strong>immersive anime/manga visual journey</strong>. Real‑time images alongside your reading — high focus, high vibes.
+          Turn any book (PDF) into an <strong>immersive anime/manga visual journey</strong>. Real-time images alongside your reading — high focus, high vibes.
         </p>
-        <ul class="mt-6 text-slate-300 text-sm space-y-2">
-          <li>⚡ Distraction‑free: art synced to your position.</li>
-          <li>🎨 Style control: shōnen, shōjo, animated film, ink…</li>
-          <li>🧠 Inclusive: support for dyslexia/ADHD and classrooms.</li>
-        </ul>
         <div class="mt-8 flex flex-wrap gap-4">
           <a href="#contact" class="px-6 py-3 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow">Request access</a>
-          <a href="#prompts" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10">Open Prompt Studio <span class="kbd">P</span></a>
+          <a href="#how" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10">How it works</a>
         </div>
         <div class="mt-8 text-xs text-slate-400">Contact: <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a></div>
       </div>
 
       <!-- Panels -->
       <div class="relative">
-        <div class="absolute -top-8 -right-4 w-48 h-48 rounded-3xl blur-3xl bg-primary-600/30" aria-hidden="true"></div>
+        <div class="absolute -top-8 -right-4 w-48 h-48 rounded-3xl blur-3xl bg-primary-600/30"></div>
         <div class="relative grid gap-6">
           <div class="panel rounded-2xl p-3 manga-bg">
             <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero1" alt="Forest spirit with glowing orbs, anime style" class="w-full h-full object-cover hidden" loading="eager"/>
+              <img id="imgHero1" alt="Hada/elfa del bosque con orbes luminosos" class="w-full h-full object-cover hidden"/>
             </div>
             <div class="mt-3 text-sm text-slate-300">Forest spirit — ethereal glow</div>
           </div>
           <div class="panel rounded-2xl p-3 manga-bg">
             <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero2" alt="Anime couple under lanterns with warm bokeh" class="w-full h-full object-cover hidden" loading="lazy"/>
+              <img id="imgHero2" alt="Pareja anime en calle iluminada por faroles" class="w-full h-full object-cover hidden"/>
             </div>
             <div class="mt-3 text-sm text-slate-300">Winter date — warm lights</div>
           </div>
           <div class="panel rounded-2xl p-3 manga-bg">
             <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero3" alt="Boy with VR headset in neon holograms" class="w-full h-full object-cover hidden" loading="lazy"/>
+              <img id="imgHero3" alt="Chico con visor de realidad virtual entre paneles luminosos" class="w-full h-full object-cover hidden"/>
             </div>
             <div class="mt-3 text-sm text-slate-300">VR dreamscape — neon grids</div>
           </div>
@@ -155,15 +127,15 @@
       <div class="mt-10 grid md:grid-cols-3 gap-6">
         <div class="panel rounded-2xl p-6">
           <h3 class="font-semibold text-lg">Focus & immersion</h3>
-          <p class="mt-2 text-slate-300">Real‑time visuals keep pace and imagination without breaking reading flow.</p>
+          <p class="mt-2 text-slate-300">Real-time visuals that keep you engaged with characters and settings — no more losing the thread.</p>
         </div>
         <div class="panel rounded-2xl p-6">
           <h3 class="font-semibold text-lg">Inclusive reading</h3>
-          <p class="mt-2 text-slate-300">Visual support for dyslexia/ADHD and better comprehension in class.</p>
+          <p class="mt-2 text-slate-300">Visual support that helps learners with dyslexia/ADHD and boosts comprehension in the classroom.</p>
         </div>
         <div class="panel rounded-2xl p-6">
           <h3 class="font-semibold text-lg">Custom art styles</h3>
-          <p class="mt-2 text-slate-300">Anime, realistic or comic; control ink, palette and framing.</p>
+          <p class="mt-2 text-slate-300">Choose anime, realistic or comic styles to match your vibe and the book’s tone.</p>
         </div>
       </div>
     </div>
@@ -177,176 +149,31 @@
         <div class="panel rounded-2xl p-6">
           <div class="text-neon text-2xl">01</div>
           <h3 class="mt-2 font-semibold">Upload your PDF</h3>
-          <p class="mt-2 text-slate-300">We detect scenes, characters and locations privately (device/cloud).</p>
+          <p class="mt-2 text-slate-300">We parse the text to identify scenes, characters and locations safely on device or private cloud.</p>
         </div>
         <div class="panel rounded-2xl p-6">
           <div class="text-neon text-2xl">02</div>
           <h3 class="mt-2 font-semibold">Generate visuals</h3>
-          <p class="mt-2 text-slate-300">AI creates images in your chosen style, synced to your reading.</p>
+          <p class="mt-2 text-slate-300">AI creates scene images in the art style you choose, synced to your current reading position.</p>
         </div>
         <div class="panel rounded-2xl p-6">
           <div class="text-neon text-2xl">03</div>
           <h3 class="mt-2 font-semibold">Read & enjoy</h3>
-          <p class="mt-2 text-slate-300">Optional, subtle and always under your control.</p>
+          <p class="mt-2 text-slate-300">Stay focused and inspired — visuals are optional, unobtrusive, and always under your control.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROMPT STUDIO -->
-  <section id="prompts" class="py-20 bg-slate-900/40 border-y border-white/10">
+  <!-- USER PERSONAS -->
+  <section id="personas" class="py-20 bg-slate-900/40 border-y border-white/10">
     <div class="mx-auto max-w-7xl px-6">
-      <div class="flex items-end justify-between gap-4 flex-wrap">
-        <h2 class="font-display text-4xl font-extrabold">Prompt Studio (ANIME x1000)</h2>
-        <div class="flex gap-2 items-center">
-          <button id="copyPrompt" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm">Copy prompt</button>
-          <button id="genBtn" class="px-4 py-2 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow text-sm">Generate image</button>
-        </div>
-      </div>
-
-      <!-- Provider config -->
-      <div class="mt-6 panel rounded-2xl p-6">
-        <div class="grid md:grid-cols-3 gap-6 text-sm">
-          <div>
-            <div class="font-semibold mb-2">Provider</div>
-            <label class="flex items-center gap-2 mb-2"><input type="radio" name="prov" value="hf" checked> Hugging Face Space</label>
-            <label class="flex items-center gap-2 mb-2"><input type="radio" name="prov" value="openai"> OpenAI (via proxy)</label>
-            <label class="flex items-center gap-2 mb-2"><input id="provLocal" type="radio" name="prov" value="local"> Local (WebGPU, beta)
-              <span id="localBadge" class="ml-2 pill text-xs hidden">checking…</span>
-            </label>
-          </div>
-          <div>
-            <div class="font-semibold mb-2">Hugging Face Space URL</div>
-            <input id="hfUrl" type="url" placeholder="https://&lt;name&gt;.hf.space" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
-            <p class="text-xs text-slate-400 mt-2">Tip: use a public Gradio Space with a single prompt field. You can Duplicate a Space to your account if CORS blocks.</p>
-          </div>
-          <div>
-            <div class="font-semibold mb-2">OpenAI proxy URL (optional)</div>
-            <input id="openaiUrl" type="url" placeholder="https://your-project.vercel.app/api/generate-image" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
-            <p class="text-xs text-slate-400 mt-2">Use this if you have an OpenAI API key on a serverless function.</p>
-          </div>
-        </div>
-        <div class="mt-3 text-xs text-slate-400">Your settings are saved locally (browser only). For <strong>Local (WebGPU)</strong>: needs a modern Chrome/Edge with WebGPU enabled and enough VRAM. First run downloads model weights and can take a while.</div>
-
-        <!-- Diagnostics -->
-        <div class="mt-4 border-t border-white/10 pt-4 text-sm">
-          <div class="flex items-center justify-between gap-2 flex-wrap">
-            <div class="font-semibold">Diagnostics</div>
-            <button id="diagBtn" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-xs">Run diagnostics</button>
-          </div>
-          <ul id="diagLog" class="mt-2 space-y-1 text-slate-300 text-xs"></ul>
-        </div>
-      </div>
-
-      <div class="mt-8 grid lg:grid-cols-3 gap-6">
-        <!-- Controls -->
-        <div class="panel rounded-2xl p-6 space-y-4">
-          <div>
-            <label class="text-sm">Scene / content</label>
-            <textarea id="desc" rows="3" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" placeholder="e.g., 'forest fairy floating above misty lake with fireflies'"></textarea>
-          </div>
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="text-sm">Style</label>
-              <select id="style" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
-                <option>shōnen kinetic</option>
-                <option>shōjo luminous</option>
-                <option>warm animated film</option>
-                <option>expressive ink manga</option>
-                <option>neon retro‑futurism</option>
-              </select>
-            </div>
-            <div>
-              <label class="text-sm">Framing</label>
-              <select id="framing" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
-                <option>wide shot</option>
-                <option>medium</option>
-                <option>extreme close‑up</option>
-                <option>heroic low‑angle</option>
-                <option>top‑down</option>
-              </select>
-            </div>
-          </div>
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="text-sm">Lighting</label>
-              <select id="light" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
-                <option>golden hour</option>
-                <option>neon night</option>
-                <option>moonlight with particles</option>
-                <option>dramatic rim light</option>
-                <option>soft volumetric</option>
-              </select>
-            </div>
-            <div>
-              <label class="text-sm">Palette</label>
-              <select id="palette" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
-                <option>magenta–violet</option>
-                <option>cyan–aqua</option>
-                <option>amber–orange</option>
-                <option>misty pastels</option>
-                <option>high‑contrast B/W</option>
-              </select>
-            </div>
-          </div>
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="text-sm">Inks / finish</label>
-              <select id="ink" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
-                <option>clean lineart + cel shading</option>
-                <option>dry brush + screentone</option>
-                <option>digital watercolor</option>
-                <option>grainy poster look</option>
-                <option>ink‑wash print</option>
-              </select>
-            </div>
-            <div>
-              <label class="text-sm">Negative (optional)</label>
-              <input id="negative" type="text" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" placeholder="no deformed hands, no text, no watermark" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Prompt output + Preview -->
-        <div class="panel rounded-2xl p-6 lg:col-span-2 space-y-4">
-          <div>
-            <h3 class="font-semibold">Generated prompt</h3>
-            <textarea id="out" rows="6" class="mt-2 w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3 font-mono text-sm" readonly></textarea>
-            <div class="flex gap-3 items-center mt-3 text-sm text-slate-400"><span id="genStatus"></span></div>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-6 items-start">
-            <div class="space-y-3">
-              <h4 class="font-semibold">Live preview</h4>
-              <div class="panel rounded-2xl overflow-hidden h-[22rem] flex items-center justify-center">
-                <img id="genPreview" alt="Generated image preview" class="max-h-full object-contain hidden"/>
-                <div id="genSkeleton" class="text-slate-400">No image yet</div>
-              </div>
-              <div class="flex gap-2 flex-wrap">
-                <button id="useAsGal1" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-sm">Send to Gallery #1</button>
-                <button id="useAsGal2" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-sm">#2</button>
-                <button id="useAsGal3" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-sm">#3</button>
-                <button id="useAsHero1" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-sm">Use as Hero #1</button>
-                <button id="useAsHero2" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-sm">Hero #2</button>
-                <button id="useAsHero3" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-sm">Hero #3</button>
-              </div>
-            </div>
-
-            <div>
-              <h4 class="font-semibold">Master template</h4>
-              <pre class="mt-2 whitespace-pre-wrap break-words bg-black/40 p-4 rounded-xl border border-white/10 text-xs">[SCENE], style <anime style>, framing <type>, lighting <type>, palette <colors>, finish <ink/lineart>, cinematic depth of field, rule‑of‑thirds composition, subtle speed lines, particles/bokeh, high detail, anatomical coherence, character consistency.
-negative: <artifacts to avoid>.</pre>
-              <div class="mt-3 text-xs text-slate-400">Tip: add dimensions (e.g. 768×1152) and steps according to your model.</div>
-            </div>
-          </div>
-
-          <!-- Presets -->
-          <div class="mt-6 grid md:grid-cols-3 gap-4">
-            <button class="preset btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm" data-desc="forest fairy floating above lake with fireflies" data-style="shōjo luminous" data-framing="wide shot" data-light="moonlight with particles" data-palette="misty pastels" data-ink="digital watercolor">Night fairy</button>
-            <button class="preset btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm" data-desc="teen couple under lanterns on a wet street" data-style="shōnen kinetic" data-framing="medium" data-light="golden hour" data-palette="amber–orange" data-ink="clean lineart + cel shading">Urban date</button>
-            <button class="preset btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm" data-desc="boy with VR visor surrounded by holographic panels" data-style="neon retro‑futurism" data-framing="heroic low‑angle" data-light="neon night" data-palette="cyan–aqua" data-ink="grainy poster look">VR dream</button>
-          </div>
-        </div>
+      <h2 class="font-display text-4xl font-extrabold">Built for real readers (manga style)</h2>
+      <div class="mt-10 grid md:grid-cols-4 gap-6 text-sm">
+        <div class="panel rounded-2xl p-5"><div class="font-semibold">Javier • 22</div><p class="mt-1 text-slate-300">Gets distracted with long texts. Loves anime. Wants visuals that keep him hooked.</p></div>
+        <div class="panel rounded-2xl p-5"><div class="font-semibold">Marta • 38</div><p class="mt-1 text-slate-300">High school teacher. Needs inclusive tools to engage students in class.</p></div>
+        <div class="panel rounded-2xl p-5"><div class="font-semibold">Diego • 16</div><p class="mt-1 text-slate-300">Dyslexia. Wants visual support to follow fantasy sagas with friends.</p></div>
+        <div class="panel rounded-2xl p-5"><div class="font-semibold">Laura • 45</div><p class="mt-1 text-slate-300">Indie writer. Explores hybrid narratives and AI-generated illustrations.</p></div>
       </div>
     </div>
   </section>
@@ -357,15 +184,15 @@ negative: <artifacts to avoid>.</pre>
       <h2 class="font-display text-4xl font-extrabold">Visual inspiration</h2>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
         <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal1" alt="Forest fairy" class="w-full h-56 object-cover hidden" loading="lazy"/>
+          <img id="gal1" alt="Hada/elfa del bosque" class="w-full h-56 object-cover hidden"/>
           <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal1ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
         </div>
         <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal2" alt="Anime couple in the city" class="w-full h-56 object-cover hidden" loading="lazy"/>
+          <img id="gal2" alt="Pareja anime en la ciudad" class="w-full h-56 object-cover hidden"/>
           <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal2ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
         </div>
         <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal3" alt="Virtual‑reality visor" class="w-full h-56 object-cover hidden" loading="lazy"/>
+          <img id="gal3" alt="Visor de realidad virtual" class="w-full h-56 object-cover hidden"/>
           <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal3ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
         </div>
       </div>
@@ -376,7 +203,7 @@ negative: <artifacts to avoid>.</pre>
   <section id="contact" class="py-20 bg-slate-900/40 border-t border-white/10">
     <div class="mx-auto max-w-3xl px-6">
       <h2 class="font-display text-4xl font-extrabold">Request early access</h2>
-      <p class="mt-2 text-slate-300">Fill the form and we’ll reach out. Or email us at <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a>.</p>
+      <p class="mt-2 text-slate-300">Fill the form and we will reach out. Or email us directly at <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a>.</p>
 
       <form id="leadForm" class="mt-8 panel rounded-2xl p-6 grid gap-5 speech">
         <div class="grid md:grid-cols-2 gap-5">
@@ -416,7 +243,7 @@ negative: <artifacts to avoid>.</pre>
 
   <footer class="py-10 text-center text-sm text-slate-400">
     <div class="mx-auto max-w-7xl px-6">
-      <div>© <span id="year"></span> MangaPages — Immersive reading with AI</div>
+      <div>© <span id="year"></span> MangaPages — Lectura inmersiva con IA</div>
       <div class="mt-2">Contact: <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a></div>
     </div>
   </footer>
@@ -425,15 +252,11 @@ negative: <artifacts to avoid>.</pre>
     // ===== MOBILE NAV
     const btn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
-    btn?.addEventListener('click', ()=> {
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      mobileNav.classList.toggle('hidden');
-    });
+    btn?.addEventListener('click', ()=> mobileNav.classList.toggle('hidden'));
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // ===== CONTACT FORM (mailto fallback) =====
-    const ENDPOINT_URL = ""; // add your endpoint here if you have one
+    const ENDPOINT_URL = "";
     const form = document.getElementById('leadForm');
     const statusEl = document.getElementById('formStatus');
     form.addEventListener('submit', async (e) => {
@@ -450,13 +273,13 @@ negative: <artifacts to avoid>.</pre>
         }
         const res = await fetch(ENDPOINT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,source:'landing-mangapages'})});
         if(!res.ok) throw new Error('Network response was not ok');
-        form.reset(); statusEl.textContent="Thanks! We'll contact you soon.";
+        form.reset(); statusEl.textContent="Thanks! We will contact you soon.";
       } catch (err) {
         console.error(err); statusEl.textContent="Error sending. Please try again or email us directly.";
       }
     });
 
-    // ===== IMAGE LOADER (same files next to index.html) =====
+    // ===== IMAGE LOADER TOLERANTE (mismos archivos junto a index.html) =====
     const candidates = {
       fairy: [
         "cute-anime-fairy-girl.jpg","cute-anime-fairy-girl.JPG","cute-anime-fairy-girl.jpeg"
@@ -488,8 +311,6 @@ negative: <artifacts to avoid>.</pre>
         img.onload = ()=>{ img.classList.remove('hidden'); if(ph) ph.classList.add('hidden'); };
         img.onerror = ()=> attempt();
         img.src = url;
-        img.setAttribute('srcset', `${url} 1x`);
-        img.setAttribute('sizes', '(max-width: 768px) 100vw, 33vw');
       };
       attempt();
     }
@@ -502,267 +323,6 @@ negative: <artifacts to avoid>.</pre>
     tryLoad('gal1', candidates.fairy, 'gal1ph');
     tryLoad('gal2', candidates.couple, 'gal2ph');
     tryLoad('gal3', candidates.vr, 'gal3ph');
-
-    // ===== Prompt Studio logic =====
-    const $ = (s)=>document.querySelector(s);
-    const desc = $('#desc');
-    const style = $('#style');
-    const framing = $('#framing');
-    const light = $('#light');
-    const palette = $('#palette');
-    const ink = $('#ink');
-    const negative = $('#negative');
-    const out = $('#out');
-    const genBtn = document.getElementById('genBtn');
-    const genStatus = document.getElementById('genStatus');
-    const genPreview = document.getElementById('genPreview');
-    const genSkeleton = document.getElementById('genSkeleton');
-
-    const provInputs = document.querySelectorAll('input[name="prov"]');
-    const provLocal = document.getElementById('provLocal');
-    const localBadge = document.getElementById('localBadge');
-    const hfUrl = document.getElementById('hfUrl');
-    const openaiUrl = document.getElementById('openaiUrl');
-
-    // Persist provider settings locally
-    const settings = JSON.parse(localStorage.getItem('mp_settings')||'{}');
-    if(settings.hfUrl) hfUrl.value = settings.hfUrl;
-    if(settings.openaiUrl) openaiUrl.value = settings.openaiUrl;
-    if(settings.provider){
-      provInputs.forEach(r=> r.checked = (r.value===settings.provider));
-    }
-    hfUrl.addEventListener('input', ()=> saveSettings());
-    openaiUrl.addEventListener('input', ()=> saveSettings());
-    provInputs.forEach(r=> r.addEventListener('change', saveSettings));
-    function saveSettings(){
-      localStorage.setItem('mp_settings', JSON.stringify({
-        provider: [...provInputs].find(r=>r.checked)?.value || 'hf',
-        hfUrl: hfUrl.value.trim(),
-        openaiUrl: openaiUrl.value.trim()
-      }));
-    }
-
-    function buildPrompt(){
-      const base = `${desc.value || 'anime scene'} — style ${style.value}, ${framing.value}, lighting ${light.value}, palette ${palette.value}, finish ${ink.value}, cinematic depth of field, rule‑of‑thirds composition, subtle speed lines, sparkling particles, high detail, anatomical coherence, character consistency.`;
-      const neg = negative.value ? `\nnegative: ${negative.value}.` : '';
-      out.value = base + neg;
-    }
-    [desc, style, framing, light, palette, ink, negative].forEach(el=> el.addEventListener('input', buildPrompt));
-    buildPrompt();
-
-    document.querySelectorAll('.preset').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        desc.value = btn.dataset.desc;
-        style.value = btn.dataset.style;
-        framing.value = btn.dataset.framing;
-        light.value = btn.dataset.light;
-        palette.value = btn.dataset.palette;
-        ink.value = btn.dataset.ink;
-        buildPrompt();
-      });
-    });
-
-    document.getElementById('copyPrompt').addEventListener('click', async()=>{
-      await navigator.clipboard.writeText(out.value);
-      const t = document.getElementById('copyPrompt');
-      const old = t.textContent; t.textContent = 'Copied!';
-      setTimeout(()=> t.textContent = old, 1200);
-    });
-
-    // === Providers ===
-    // Helper: soft-check WebGPU
-    function supportsWebGPU(){ return 'gpu' in navigator; }
-
-    // Local (WebGPU) — experimental loader (MLC / Web Stable Diffusion)
-    // Graceful: never throw fatally; guide the user & fall back.
-    let _localSD = null;
-    async function ensureLocalModel(){
-      if(!supportsWebGPU()){
-        return null; // no WebGPU; caller will handle fallback/UX
-      }
-      if(_localSD) return _localSD;
-      try{
-        localBadge.classList.remove('hidden');
-        localBadge.textContent = 'loading…';
-        // Attempt to load a browser SD pipeline (MLC). Different CDNs may work; handle failure gracefully.
-        if(!window.websd){
-          // try jsDelivr first
-          try{
-            await import('https://cdn.jsdelivr.net/npm/@mlc-ai/web-stable-diffusion@0.1.8/dist/index.browser.js');
-          }catch(e){
-            // fallback to unpkg/esm if needed
-            try{ await import('https://unpkg.com/@mlc-ai/web-stable-diffusion@0.1.8/dist/index.browser.js'); }catch(_){ /* ignore */ }
-          }
-        }
-        if(window.websd){
-          _localSD = await window.websd.createPipeline?.({
-            model: 'stabilityai/stable-diffusion-2-1',
-            scheduler: 'lcm',
-            dtype: 'q4f16'
-          }) || window.websd;
-          localBadge.textContent = 'ready';
-          return _localSD;
-        }
-      }catch(e){ console.warn('MLC load failed', e); }
-      localBadge.textContent = 'unavailable';
-      return null;
-    }
-
-    async function generateViaLocal(prompt){
-      const sd = await ensureLocalModel();
-      if(!sd) throw new Error('WebGPU not available or local model unavailable.');
-      if(typeof sd.generate === 'function'){
-        const img = await sd.generate(prompt, { steps: 6, guidance_scale: 1.5, width: 512, height: 512 });
-        return (typeof img === 'string') ? img : img?.data || img?.url;
-      }
-      if(typeof sd.txt2img === 'function'){
-        const img = await sd.txt2img({ prompt, num_inference_steps: 6, guidance_scale: 1.5, width: 512, height: 512 });
-        return (typeof img === 'string') ? img : img?.data || img?.url;
-      }
-      throw new Error('Local model loaded but no compatible API was found.');
-    }
-
-    async function generateViaOpenAI(prompt){
-      const url = openaiUrl.value.trim();
-      if(!url){ throw new Error('OpenAI proxy URL not configured'); }
-      const res = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ prompt }) });
-      if(!res.ok) throw new Error('Bad response from OpenAI proxy');
-      const data = await res.json();
-      return data.image || data.url; // data:image/... or http(s) URL
-    }
-
-    // Generic Gradio Space adapter
-    async function generateViaHuggingFace(prompt){
-      const base = hfUrl.value.trim().replace(/\/$/, '');
-      if(!base){ throw new Error('Hugging Face Space URL not configured'); }
-      const endpoints = [ `${base}/api/predict/`, `${base}/run/predict` ];
-      let lastErr = null;
-      for(const url of endpoints){
-        try{
-          const res = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ data: [ prompt ] }) });
-          if(!res.ok) throw new Error(`HF ${url} bad response`);
-          const out = await res.json();
-          if(out?.data?.[0] && typeof out.data[0] === 'string' && out.data[0].startsWith('data:image')) return out.data[0];
-          if(out?.data?.[0]?.data && typeof out.data[0].data === 'string') return out.data[0].data;
-          if(out?.data?.[0] && typeof out.data[0] === 'string' && out.data[0].startsWith('http')) return out.data[0];
-          if(out?.output?.data?.[0]){
-            const v = out.output.data[0];
-            if(typeof v === 'string') return v;
-            if(v?.data) return v.data;
-          }
-          throw new Error('HF: Unrecognized response format');
-        }catch(e){ lastErr = e; }
-      }
-      throw lastErr || new Error('HF call failed');
-    }
-
-    async function generateImage(){
-      const prompt = out.value.trim();
-      if(!prompt){ genStatus.textContent = 'Write a prompt first.'; return; }
-      const provider = [...provInputs].find(r=>r.checked)?.value || 'hf';
-
-      genBtn.disabled = true; genBtn.textContent = 'Generating…';
-      genStatus.textContent = (provider==='hf')
-        ? 'Calling Hugging Face Space…'
-        : (provider==='openai' ? 'Contacting OpenAI proxy…' : 'Initializing local WebGPU model…');
-      try{
-        let src;
-        if(provider==='hf') {
-          src = await generateViaHuggingFace(prompt);
-        } else if(provider==='openai') {
-          src = await generateViaOpenAI(prompt);
-        } else if(provider==='local') {
-          // If WebGPU is missing, inform and soft‑fail
-          if(!supportsWebGPU()){
-            genStatus.textContent = 'WebGPU is not available in this browser. Use Hugging Face or OpenAI.';
-            return; // graceful
-          }
-          src = await generateViaLocal(prompt);
-        } else {
-          throw new Error('Unknown provider: '+provider);
-        }
-        if(!src) throw new Error('No image in response');
-        genPreview.src = src;
-        genPreview.classList.remove('hidden');
-        genSkeleton.classList.add('hidden');
-        genStatus.textContent = 'Done.';
-      }catch(err){
-        console.error(err);
-        genStatus.textContent = (err?.message || 'Generation failed') + '. See console (CORS or format).';
-      }finally{
-        genBtn.disabled = false; genBtn.textContent = 'Generate image';
-      }
-    }
-    genBtn.addEventListener('click', generateImage);
-
-    // Send preview to gallery / hero slots
-    function pushToImg(id, ph){
-      return ()=>{
-        if(!genPreview.src) return;
-        const el = document.getElementById(id);
-        const placeholder = ph ? document.getElementById(ph) : null;
-        el.src = genPreview.src;
-        el.onload = ()=>{ el.classList.remove('hidden'); placeholder?.classList.add('hidden'); };
-      };
-    }
-    document.getElementById('useAsGal1').addEventListener('click', pushToImg('gal1','gal1ph'));
-    document.getElementById('useAsGal2').addEventListener('click', pushToImg('gal2','gal2ph'));
-    document.getElementById('useAsGal3').addEventListener('click', pushToImg('gal3','gal3ph'));
-    document.getElementById('useAsHero1').addEventListener('click', pushToImg('imgHero1'));
-    document.getElementById('useAsHero2').addEventListener('click', pushToImg('imgHero2'));
-    document.getElementById('useAsHero3').addEventListener('click', pushToImg('imgHero3'));
-
-    // Keyboard shortcut P to jump to studio
-    document.addEventListener('keydown', (e)=>{
-      if((e.key === 'p' || e.key === 'P') && !e.metaKey && !e.ctrlKey){
-        e.preventDefault();
-        location.hash = '#prompts';
-        desc.focus();
-      }
-    });
-
-    // ===== Init: adapt UI to WebGPU support & simple tests =====
-    (function initProviderUI(){
-      if(!provLocal) return;
-      if(!supportsWebGPU()){
-        provLocal.disabled = true;
-        const lbl = provLocal.parentElement;
-        const warn = document.createElement('span');
-        warn.className = 'ml-2 text-xs text-slate-400';
-        warn.textContent = '(not supported in this browser)';
-        lbl.appendChild(warn);
-      } else {
-        localBadge.classList.remove('hidden');
-        localBadge.textContent = 'WebGPU ✓';
-      }
-    })();
-
-    // Diagnostics runner ("test cases")
-    const diagBtn = document.getElementById('diagBtn');
-    const diagLog = document.getElementById('diagLog');
-    function logDiag(msg, ok){
-      const li = document.createElement('li');
-      li.innerHTML = ok ? `✅ ${msg}` : `❌ ${msg}`;
-      diagLog.appendChild(li);
-    }
-    diagBtn?.addEventListener('click', async ()=>{
-      diagLog.innerHTML = '';
-      // Test 1: WebGPU presence
-      logDiag('WebGPU present in navigator: ' + (supportsWebGPU() ? 'yes' : 'no'), supportsWebGPU());
-      // Test 2: HF URL looks valid
-      const hfValid = /^https?:\/\/.+\.hf\.space(\/.*)?$/.test((hfUrl.value||'').trim());
-      logDiag('HF Space URL format valid: ' + (hfValid ? 'yes' : 'no'), hfValid);
-      // Test 3: OpenAI proxy URL looks valid
-      const oaValid = /^https?:\/\//.test((openaiUrl.value||'').trim()) || !openaiUrl.value;
-      logDiag('OpenAI proxy URL format valid (or empty): ' + (oaValid ? 'yes' : 'no'), oaValid);
-      // Test 4: Try to init local model lightly (won't throw fatally)
-      try{
-        const sd = await ensureLocalModel();
-        logDiag('Local model initializable: ' + (sd ? 'yes' : 'no'), !!sd);
-      }catch(e){
-        logDiag('Local model initializable: no', false);
-      }
-    });
   </script>
 </body>
 </html>
