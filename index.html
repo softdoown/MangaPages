@@ -205,24 +205,8 @@
 
       <!-- Provider config -->
       <div class="mt-6 panel rounded-2xl p-6">
-        <div class="grid md:grid-cols-3 gap-6 text-sm">
-          <div>
-            <div class="font-semibold mb-2">Provider</div>
-            <label class="flex items-center gap-2 mb-2"><input type="radio" name="prov" value="hf" checked> Hugging Face Space</label>
-            <label class="flex items-center gap-2"><input type="radio" name="prov" value="openai"> OpenAI (via proxy)</label>
-          </div>
-          <div>
-            <div class="font-semibold mb-2">Hugging Face Space URL</div>
-            <input id="hfUrl" type="url" placeholder="https://<name>.hf.space" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
-            <p class="text-xs text-slate-400 mt-2">Tip: use a public Gradio Space with a single prompt field. You can Duplicate a Space to your account if CORS blocks.</p>
-          </div>
-          <div>
-            <div class="font-semibold mb-2">OpenAI proxy URL (optional)</div>
-            <input id="openaiUrl" type="url" placeholder="https://your-project.vercel.app/api/generate-image" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
-            <p class="text-xs text-slate-400 mt-2">Use this if you have an OpenAI API key on a serverless function.</p>
-          </div>
-        </div>
-        <div class="mt-3 text-xs text-slate-400">Your settings are saved locally (browser only).</div>
+        <div class="grid md:grid-cols-3 gap-6 text-sm">$1</div>
+        <div class="mt-3 text-xs text-slate-400">Your settings are saved locally (browser only). For <strong>Local (WebGPU)</strong>: needs a modern Chrome/Edge with WebGPU enabled and enough VRAM. First run downloads model weights and can take a while.</div>
       </div>
 
       <div class="mt-8 grid lg:grid-cols-3 gap-6">
@@ -529,7 +513,8 @@ negative: <artifacts to avoid>.</pre>
 
     function buildPrompt(){
       const base = `${desc.value || 'anime scene'} — style ${style.value}, ${framing.value}, lighting ${light.value}, palette ${palette.value}, finish ${ink.value}, cinematic depth of field, rule‑of‑thirds composition, subtle speed lines, sparkling particles, high detail, anatomical coherence, character consistency.`;
-      const neg = negative.value ? `\nnegative: ${negative.value}.` : '';
+      const neg = negative.value ? `
+negative: ${negative.value}.` : '';
       out.value = base + neg;
     }
     [desc, style, framing, light, palette, ink, negative].forEach(el=> el.addEventListener('input', buildPrompt));
@@ -555,6 +540,47 @@ negative: <artifacts to avoid>.</pre>
     });
 
     // === Providers ===
+    // Local (WebGPU) — experimental loader (MLC / Web Stable Diffusion)
+    // We'll try to lazy‑load a browser SD pipeline. First run may take time to fetch weights.
+    let _localSD = null;
+    async function ensureLocalModel(){
+      if(!('gpu' in navigator)) throw new Error('WebGPU is not available in this browser. Try Chrome/Edge latest on desktop and enable chrome://flags/#enable-unsafe-webgpu if needed.');
+      if(_localSD) return _localSD;
+      genStatus.textContent = 'Loading local model (first run downloads weights)…';
+      // Attempt 1: MLC web-stable-diffusion (browser bundle)
+      try{
+        if(!window.websd){
+          await import('https://cdn.jsdelivr.net/npm/@mlc-ai/web-stable-diffusion@0.1.8/dist/index.browser.js');
+        }
+        if(window.websd){
+          // create a light pipeline (turbo) if available, otherwise default
+          _localSD = await window.websd.createPipeline?.({
+            model: 'stabilityai/stable-diffusion-2-1', // fallback; actual availability depends on CDN packs
+            scheduler: 'lcm',
+            dtype: 'q4f16' // quantized for smaller memory
+          }) || window.websd;
+          return _localSD;
+        }
+      }catch(e){ console.warn('MLC load failed', e); }
+
+      throw new Error('Could not initialize a local WebGPU model automatically.');
+    }
+
+    async function generateViaLocal(prompt){
+      const sd = await ensureLocalModel();
+      // Different builds expose different APIs; try common ones in order.
+      // 1) websd.generate(prompt, opts)
+      if(typeof sd.generate === 'function'){
+        const img = await sd.generate(prompt, { steps: 6, guidance_scale: 1.5, width: 512, height: 512 });
+        return (typeof img === 'string') ? img : img?.data || img?.url;
+      }
+      // 2) sd.txt2img(prompt, opts)
+      if(typeof sd.txt2img === 'function'){
+        const img = await sd.txt2img({ prompt, num_inference_steps: 6, guidance_scale: 1.5, width: 512, height: 512 });
+        return (typeof img === 'string') ? img : img?.data || img?.url;
+      }
+      throw new Error('Local model loaded but no compatible API was found.');
+    }
     async function generateViaOpenAI(prompt){
       const url = openaiUrl.value.trim();
       if(!url){ throw new Error('OpenAI proxy URL not configured'); }
@@ -641,3 +667,4 @@ negative: <artifacts to avoid>.</pre>
   </script>
 </body>
 </html>
+
