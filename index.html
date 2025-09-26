@@ -3,8 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MangaPages — Lectura inmersiva con IA</title>
-  <meta name="description" content="Convierte cualquier libro en una experiencia visual inmersiva con estética anime/manga. Imágenes generadas en tiempo real mientras lees." />
+  <title>MangaPages — Convierte cualquier libro en anime (IA en tiempo real)</title>
+  <meta name="description" content="Convierte cualquier libro en una experiencia anime/manga. Imágenes generadas en tiempo real mientras lees. Plantillas de prompt listas para usar." />
+  <meta name="theme-color" content="#0b1020" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MangaPages — Convierte cualquier libro en anime" />
+  <meta property="og:description" content="Lectura inmersiva con estética anime/manga y generación de imágenes en tiempo real. Incluye Prompt Studio para resultados perfectos." />
+  <meta property="og:image" content="cover-mangapages.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -17,7 +25,7 @@
           },
           colors: {
             primary: {500:'#8b5cf6',600:'#7c3aed',700:'#6d28d9'},
-            sakura: '#ff6ad5', neon: '#f59e0b', ink: '#0b1020',
+            sakura: '#ff6ad5', neon: '#f59e0b', ink: '#0b1020', aqua:'#67e8f9'
           },
           boxShadow: { glow:"0 0 0 3px rgba(255,255,255,0.18), 0 10px 30px rgba(139,92,246,.35)" }
         }
@@ -45,32 +53,46 @@
     .speedlines:before{content:"";position:absolute;inset:-40% -20%;background:repeating-linear-gradient(75deg,rgba(255,255,255,.07) 0 2px,transparent 2px 6px);transform:skewY(-8deg);pointer-events:none}
     .badge-onom{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .7rem;border:2px solid rgba(255,255,255,.2);border-radius:.75rem;background:rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.25)}
     .sticker{position:absolute;right:-8px;top:-10px;transform:rotate(6deg);font-weight:800}
+    .kbd{border:1px solid rgba(255,255,255,.22);border-bottom-width:3px;border-radius:.5rem;padding:.1rem .4rem;background:rgba(255,255,255,.06)}
   </style>
+
+  <!-- schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"MangaPages",
+    "applicationCategory":"Reading",
+    "operatingSystem":"Web",
+    "description":"Lectura inmersiva con estética anime/manga y generación de imágenes en tiempo real",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}
+  }
+  </script>
 </head>
 <body class="bg-ink text-slate-100 font-body">
   <!-- HEADER -->
   <header class="sticky top-0 z-40 bg-ink/80 backdrop-blur border-b border-white/10">
     <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3">
+      <a href="#" class="flex items-center gap-3" aria-label="MangaPages home">
         <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-600 to-sakura shadow-glow"></div>
         <div class="font-display text-xl tracking-wide">MangaPages</div>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm text-slate-200">
-        <a href="#features" class="hover:text-white">Features</a>
-        <a href="#how" class="hover:text-white">How it works</a>
-        <a href="#personas" class="hover:text-white">User Personas</a>
-        <a href="#gallery" class="hover:text-white">Gallery</a>
-        <a href="#contact" class="px-4 py-2 rounded-xl bg-primary-600 hover:bg-primary-500 text-white shadow-glow">Get Early Access</a>
+        <a href="#features" class="hover:text-white">Funciones</a>
+        <a href="#how" class="hover:text-white">Cómo funciona</a>
+        <a href="#prompts" class="hover:text-white">Prompt Studio</a>
+        <a href="#gallery" class="hover:text-white">Galería</a>
+        <a href="#contact" class="px-4 py-2 rounded-xl bg-primary-600 hover:bg-primary-500 text-white shadow-glow">Acceso anticipado</a>
       </nav>
-      <button id="menuBtn" class="md:hidden inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20">☰</button>
+      <button id="menuBtn" class="md:hidden inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg白/20" aria-expanded="false" aria-controls="mobileNav">☰</button>
     </div>
     <div id="mobileNav" class="md:hidden hidden border-t border-white/10">
       <nav class="px-6 py-4 space-y-3">
-        <a href="#features" class="block">Features</a>
-        <a href="#how" class="block">How it works</a>
-        <a href="#personas" class="block">User Personas</a>
-        <a href="#gallery" class="block">Gallery</a>
-        <a href="#contact" class="block">Get Early Access</a>
+        <a href="#features" class="block">Funciones</a>
+        <a href="#how" class="block">Cómo funciona</a>
+        <a href="#prompts" class="block">Prompt Studio</a>
+        <a href="#gallery" class="block">Galería</a>
+        <a href="#contact" class="block">Acceso anticipado</a>
       </nav>
     </div>
   </header>
@@ -80,38 +102,43 @@
     <div class="mx-auto max-w-7xl px-6 pt-20 pb-24 sm:pt-24 sm:pb-28 md:pt-28 md:pb-36 grid md:grid-cols-2 gap-10 items-center">
       <div>
         <h1 class="font-display stroke-title text-5xl sm:text-6xl leading-tight">
-          <span class="text-white">Read it.</span> <span class="text-sakura">See it.</span> <span class="text-neon">Feel it.</span>
+          <span class="text-white">Convierte tu libro</span> <span class="text-sakura">en anime</span> <span class="text-neon">al instante</span>
         </h1>
-        <div class="badge-onom sticker text-sakura">KA-POW!</div>
+        <div class="badge-onom sticker text-sakura">BAM!</div>
         <p class="mt-5 text-slate-300 text-lg max-w-xl">
-          Turn any book (PDF) into an <strong>immersive anime/manga visual journey</strong>. Real-time images alongside your reading — high focus, high vibes.
+          Lectura inmersiva con <strong>imágenes estilo manga</strong> generadas en tiempo real según lo que lees. Más foco, más emoción, más memoria.
         </p>
+        <ul class="mt-6 text-slate-300 text-sm space-y-2">
+          <li>⚡ Sin distracciones: arte sincronizado con tu posición.</li>
+          <li>🎨 Elige estilos: shōnen, shōjo, cine animado, inkwash…</li>
+          <li>🧠 Inclusivo: ayuda a estudiantes con dislexia/TDAH.</li>
+        </ul>
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="#contact" class="px-6 py-3 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow">Request access</a>
-          <a href="#how" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10">How it works</a>
+          <a href="#contact" class="px-6 py-3 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow">Quiero acceso</a>
+          <a href="#prompts" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10">Abrir Prompt Studio <span class="kbd">P</span></a>
         </div>
-        <div class="mt-8 text-xs text-slate-400">Contact: <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a></div>
+        <div class="mt-8 text-xs text-slate-400">Contacto: <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a></div>
       </div>
 
       <!-- Panels -->
       <div class="relative">
-        <div class="absolute -top-8 -right-4 w-48 h-48 rounded-3xl blur-3xl bg-primary-600/30"></div>
+        <div class="absolute -top-8 -right-4 w-48 h-48 rounded-3xl blur-3xl bg-primary-600/30" aria-hidden="true"></div>
         <div class="relative grid gap-6">
           <div class="panel rounded-2xl p-3 manga-bg">
             <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero1" alt="Hada/elfa del bosque con orbes luminosos" class="w-full h-full object-cover hidden"/>
+              <img id="imgHero1" alt="Hada del bosque con orbes luminosos, estilo anime con cel shading" class="w-full h-full object-cover hidden" loading="eager"/>
             </div>
             <div class="mt-3 text-sm text-slate-300">Forest spirit — ethereal glow</div>
           </div>
           <div class="panel rounded-2xl p-3 manga-bg">
             <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero2" alt="Pareja anime en calle iluminada por faroles" class="w-full h-full object-cover hidden"/>
+              <img id="imgHero2" alt="Pareja anime en calle con faroles, bokeh cálido" class="w-full h-full object-cover hidden" loading="lazy"/>
             </div>
             <div class="mt-3 text-sm text-slate-300">Winter date — warm lights</div>
           </div>
           <div class="panel rounded-2xl p-3 manga-bg">
             <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero3" alt="Chico con visor de realidad virtual entre paneles luminosos" class="w-full h-full object-cover hidden"/>
+              <img id="imgHero3" alt="Chico con visor VR entre paneles neón, estética retrofuturista" class="w-full h-full object-cover hidden" loading="lazy"/>
             </div>
             <div class="mt-3 text-sm text-slate-300">VR dreamscape — neon grids</div>
           </div>
@@ -123,19 +150,19 @@
   <!-- FEATURES -->
   <section id="features" class="py-20 bg-slate-900/40 border-t border-white/10">
     <div class="mx-auto max-w-7xl px-6">
-      <h2 class="font-display text-4xl font-extrabold">Why readers love MangaPages</h2>
+      <h2 class="font-display text-4xl font-extrabold">Por qué encanta a lectores y docentes</h2>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
         <div class="panel rounded-2xl p-6">
-          <h3 class="font-semibold text-lg">Focus & immersion</h3>
-          <p class="mt-2 text-slate-300">Real-time visuals that keep you engaged with characters and settings — no more losing the thread.</p>
+          <h3 class="font-semibold text-lg">Foco & inmersión</h3>
+          <p class="mt-2 text-slate-300">Visuales en tiempo real que mantienen el ritmo y la imaginación sin romper la lectura.</p>
         </div>
         <div class="panel rounded-2xl p-6">
-          <h3 class="font-semibold text-lg">Inclusive reading</h3>
-          <p class="mt-2 text-slate-300">Visual support that helps learners with dyslexia/ADHD and boosts comprehension in the classroom.</p>
+          <h3 class="font-semibold text-lg">Lectura inclusiva</h3>
+          <p class="mt-2 text-slate-300">Apoyo visual para dislexia/TDAH y comprensión en el aula.</p>
         </div>
         <div class="panel rounded-2xl p-6">
-          <h3 class="font-semibold text-lg">Custom art styles</h3>
-          <p class="mt-2 text-slate-300">Choose anime, realistic or comic styles to match your vibe and the book’s tone.</p>
+          <h3 class="font-semibold text-lg">Estilos a medida</h3>
+          <p class="mt-2 text-slate-300">Anime, realista o cómic; controla tinta, paleta y encuadres.</p>
         </div>
       </div>
     </div>
@@ -144,36 +171,124 @@
   <!-- HOW IT WORKS -->
   <section id="how" class="py-20">
     <div class="mx-auto max-w-7xl px-6">
-      <h2 class="font-display text-4xl font-extrabold">How it works</h2>
+      <h2 class="font-display text-4xl font-extrabold">Cómo funciona</h2>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
         <div class="panel rounded-2xl p-6">
           <div class="text-neon text-2xl">01</div>
-          <h3 class="mt-2 font-semibold">Upload your PDF</h3>
-          <p class="mt-2 text-slate-300">We parse the text to identify scenes, characters and locations safely on device or private cloud.</p>
+          <h3 class="mt-2 font-semibold">Sube tu PDF</h3>
+          <p class="mt-2 text-slate-300">Detectamos escenas, personajes y lugares de forma privada (dispositivo/nube).</p>
         </div>
         <div class="panel rounded-2xl p-6">
           <div class="text-neon text-2xl">02</div>
-          <h3 class="mt-2 font-semibold">Generate visuals</h3>
-          <p class="mt-2 text-slate-300">AI creates scene images in the art style you choose, synced to your current reading position.</p>
+          <h3 class="mt-2 font-semibold">Generamos visuales</h3>
+          <p class="mt-2 text-slate-300">IA crea imágenes con el estilo elegido, sincronizadas a tu lectura.</p>
         </div>
         <div class="panel rounded-2xl p-6">
           <div class="text-neon text-2xl">03</div>
-          <h3 class="mt-2 font-semibold">Read & enjoy</h3>
-          <p class="mt-2 text-slate-300">Stay focused and inspired — visuals are optional, unobtrusive, and always under your control.</p>
+          <h3 class="mt-2 font-semibold">Lee y disfruta</h3>
+          <p class="mt-2 text-slate-300">Siempre opcional, discreto y bajo tu control.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- USER PERSONAS -->
-  <section id="personas" class="py-20 bg-slate-900/40 border-y border-white/10">
+  <!-- PROMPT STUDIO -->
+  <section id="prompts" class="py-20 bg-slate-900/40 border-y border-white/10">
     <div class="mx-auto max-w-7xl px-6">
-      <h2 class="font-display text-4xl font-extrabold">Built for real readers (manga style)</h2>
-      <div class="mt-10 grid md:grid-cols-4 gap-6 text-sm">
-        <div class="panel rounded-2xl p-5"><div class="font-semibold">Javier • 22</div><p class="mt-1 text-slate-300">Gets distracted with long texts. Loves anime. Wants visuals that keep him hooked.</p></div>
-        <div class="panel rounded-2xl p-5"><div class="font-semibold">Marta • 38</div><p class="mt-1 text-slate-300">High school teacher. Needs inclusive tools to engage students in class.</p></div>
-        <div class="panel rounded-2xl p-5"><div class="font-semibold">Diego • 16</div><p class="mt-1 text-slate-300">Dyslexia. Wants visual support to follow fantasy sagas with friends.</p></div>
-        <div class="panel rounded-2xl p-5"><div class="font-semibold">Laura • 45</div><p class="mt-1 text-slate-300">Indie writer. Explores hybrid narratives and AI-generated illustrations.</p></div>
+      <div class="flex items-end justify-between gap-4 flex-wrap">
+        <h2 class="font-display text-4xl font-extrabold">Prompt Studio (anime 1000%)</h2>
+        <button id="copyPrompt" class="px-4 py-2 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow text-sm">Copiar prompt</button>
+      </div>
+
+      <div class="mt-8 grid lg:grid-cols-3 gap-6">
+        <!-- Controls -->
+        <div class="panel rounded-2xl p-6 space-y-4">
+          <div>
+            <label class="text-sm">Escena / contenido</label>
+            <textarea id="desc" rows="3" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" placeholder="p.ej., 'hada del bosque sobre lago brumoso con luciérnagas' "></textarea>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm">Estilo</label>
+              <select id="style" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
+                <option>shōnen cinético</option>
+                <option>shōjo luminoso</option>
+                <option>película animada cálida</option>
+                <option>manga tinta expresiva</option>
+                <option>retrofuturista neón</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-sm">Encuadre</label>
+              <select id="framing" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
+                <option>plano general</option>
+                <option>medio</option>
+                <option>primerísimo primer plano</option>
+                <option>contrapicado heroico</option>
+                <option>cenital</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm">Luz</label>
+              <select id="light" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
+                <option>hora dorada</option>
+                <option>neón nocturno</option>
+                <option>luna y partículas</option>
+                <option>rim light dramático</option>
+                <option>volumétrica suave</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-sm">Paleta</label>
+              <select id="palette" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
+                <option>magenta–morado (sakura / primary)</option>
+                <option>cian–aqua</option>
+                <option>ámbar–naranja</option>
+                <option>pastel niebla</option>
+                <option>alto contraste B/N</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm">Trazos / acabado</label>
+              <select id="ink" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
+                <option>lineart limpio + cel shading</option>
+                <option>pincel seco + tramas</option>
+                <option>acuarela digital</option>
+                <option>póster granulado</option>
+                <option>estampa ink-wash</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-sm">Negativo (opcional)</label>
+              <input id="negative" type="text" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" placeholder="sin manos deformes, sin texto, sin watermark" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Prompt output -->
+        <div class="panel rounded-2xl p-6 lg:col-span-2">
+          <h3 class="font-semibold">Prompt generado</h3>
+          <textarea id="out" rows="10" class="mt-2 w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3 font-mono text-sm" readonly></textarea>
+          <p class="text-xs text-slate-400 mt-2">Sugerencia: añade dimensiones (p.ej. 768×1152) y pasos de muestreo según tu modelo.</p>
+
+          <!-- Presets -->
+          <div class="mt-6 grid md:grid-cols-3 gap-4">
+            <button class="preset btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm" data-desc="hada del bosque flotando sobre lago con luciérnagas" data-style="shōjo luminoso" data-framing="plano general" data-light="luna y partículas" data-palette="pastel niebla" data-ink="acuarela digital">Hada nocturna</button>
+            <button class="preset btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm" data-desc="pareja adolescente bajo faroles en calle mojada" data-style="shōnen cinético" data-framing="medio" data-light="hora dorada" data-palette="ámbar–naranja" data-ink="lineart limpio + cel shading">Cita urbana</button>
+            <button class="preset btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm" data-desc="chico con visor VR rodeado de paneles holográficos" data-style="retrofuturista neón" data-framing="contrapicado heroico" data-light="neón nocturno" data-palette="cian–aqua" data-ink="póster granulado">Sueño VR</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prompt "plantilla maestra" visible -->
+      <div class="mt-10 text-sm text-slate-300">
+        <p class="font-semibold">Plantilla maestra (cópiala si prefieres escribir a mano):</p>
+        <pre class="mt-2 whitespace-pre-wrap break-words bg-black/40 p-4 rounded-xl border border-white/10 text-xs">[DESCRIPCIÓN ESCENA], estilo <estilo anime>, encuadre <tipo>, iluminación <tipo>, paleta <colores>, acabado <tinta/lineart>, <profundidad de campo>, <composición (regla de tercios / diagonal dinámica)>, <motion lines / partículas / bokeh>. <si procede: referencia suave a "inspiración cinematográfica de animación", sin marcas>.
+negativo: <artefactos a evitar>. </pre>
       </div>
     </div>
   </section>
@@ -181,18 +296,18 @@
   <!-- GALLERY -->
   <section id="gallery" class="py-20">
     <div class="mx-auto max-w-7xl px-6">
-      <h2 class="font-display text-4xl font-extrabold">Visual inspiration</h2>
+      <h2 class="font-display text-4xl font-extrabold">Inspiración visual</h2>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
         <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal1" alt="Hada/elfa del bosque" class="w-full h-56 object-cover hidden"/>
+          <img id="gal1" alt="Hada/elfa del bosque" class="w-full h-56 object-cover hidden" loading="lazy"/>
           <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal1ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
         </div>
         <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal2" alt="Pareja anime en la ciudad" class="w-full h-56 object-cover hidden"/>
+          <img id="gal2" alt="Pareja anime en la ciudad" class="w-full h-56 object-cover hidden" loading="lazy"/>
           <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal2ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
         </div>
         <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal3" alt="Visor de realidad virtual" class="w-full h-56 object-cover hidden"/>
+          <img id="gal3" alt="Visor de realidad virtual" class="w-full h-56 object-cover hidden" loading="lazy"/>
           <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal3ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
         </div>
       </div>
@@ -202,39 +317,39 @@
   <!-- CONTACT -->
   <section id="contact" class="py-20 bg-slate-900/40 border-t border-white/10">
     <div class="mx-auto max-w-3xl px-6">
-      <h2 class="font-display text-4xl font-extrabold">Request early access</h2>
-      <p class="mt-2 text-slate-300">Fill the form and we will reach out. Or email us directly at <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a>.</p>
+      <h2 class="font-display text-4xl font-extrabold">Pide acceso anticipado</h2>
+      <p class="mt-2 text-slate-300">Rellena el formulario y te contactamos. O escríbenos a <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a>.</p>
 
       <form id="leadForm" class="mt-8 panel rounded-2xl p-6 grid gap-5 speech">
         <div class="grid md:grid-cols-2 gap-5">
           <div>
-            <label class="text-sm">Full name</label>
-            <input required name="name" type="text" placeholder="Your name" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
+            <label class="text-sm">Nombre completo</label>
+            <input required name="name" type="text" placeholder="Tu nombre" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
           </div>
           <div>
             <label class="text-sm">Email</label>
-            <input required name="email" type="email" placeholder="you@example.com" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
+            <input required name="email" type="email" placeholder="tú@ejemplo.com" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
           </div>
         </div>
         <div>
-          <label class="text-sm">Who are you?</label>
+          <label class="text-sm">Quién eres</label>
           <select name="role" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
-            <option value="reader">Reader</option>
-            <option value="student">Student</option>
-            <option value="teacher">Teacher</option>
-            <option value="creator">Writer/Creator</option>
+            <option value="reader">Lector/a</option>
+            <option value="student">Estudiante</option>
+            <option value="teacher">Docente</option>
+            <option value="creator">Autor/a</option>
           </select>
         </div>
         <div>
-          <label class="text-sm">Tell us about your use case</label>
-          <textarea name="message" rows="4" placeholder="What do you want to achieve with MangaPages?" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600"></textarea>
+          <label class="text-sm">Tu caso de uso</label>
+          <textarea name="message" rows="4" placeholder="¿Qué quieres conseguir con MangaPages?" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600"></textarea>
         </div>
         <label class="flex items-start gap-3 text-sm">
           <input required type="checkbox" class="mt-1" />
-          <span>I agree to be contacted about early access and product updates.</span>
+          <span>Acepto que me contactéis sobre acceso anticipado y novedades del producto.</span>
         </label>
         <div class="flex gap-4 items-center">
-          <button type="submit" class="px-6 py-3 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow">Send</button>
+          <button type="submit" class="px-6 py-3 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow">Enviar</button>
           <span id="formStatus" class="text-sm text-slate-400"></span>
         </div>
       </form>
@@ -244,7 +359,7 @@
   <footer class="py-10 text-center text-sm text-slate-400">
     <div class="mx-auto max-w-7xl px-6">
       <div>© <span id="year"></span> MangaPages — Lectura inmersiva con IA</div>
-      <div class="mt-2">Contact: <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a></div>
+      <div class="mt-2">Contacto: <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a></div>
     </div>
   </footer>
 
@@ -252,30 +367,34 @@
     // ===== MOBILE NAV
     const btn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
-    btn?.addEventListener('click', ()=> mobileNav.classList.toggle('hidden'));
+    btn?.addEventListener('click', ()=> {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      mobileNav.classList.toggle('hidden');
+    });
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // ===== CONTACT FORM (mailto fallback) =====
-    const ENDPOINT_URL = "";
+    const ENDPOINT_URL = ""; // añade aquí tu endpoint si lo tienes
     const form = document.getElementById('leadForm');
     const statusEl = document.getElementById('formStatus');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      statusEl.textContent = "Sending...";
+      statusEl.textContent = "Enviando...";
       const data = Object.fromEntries(new FormData(form).entries());
       try {
         if (!ENDPOINT_URL) {
-          const subject = encodeURIComponent('MangaPages — Early Access');
-          const body = encodeURIComponent(`Name: ${data.name}%0AEmail: ${data.email}%0ARole: ${data.role}%0AMessage: ${data.message}`);
+          const subject = encodeURIComponent('MangaPages — Acceso anticipado');
+          const body = encodeURIComponent(`Nombre: ${data.name}%0AEmail: ${data.email}%0ARol: ${data.role}%0AMensaje: ${data.message}`);
           window.location.href = `mailto:jesus@softdoown.com?subject=${subject}&body=${body}`;
-          statusEl.textContent = "No endpoint configured. Opened email client.";
+          statusEl.textContent = "Sin endpoint configurado. Abriendo cliente de correo.";
           return;
         }
         const res = await fetch(ENDPOINT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,source:'landing-mangapages'})});
         if(!res.ok) throw new Error('Network response was not ok');
-        form.reset(); statusEl.textContent="Thanks! We will contact you soon.";
+        form.reset(); statusEl.textContent="¡Gracias! Te contactaremos pronto.";
       } catch (err) {
-        console.error(err); statusEl.textContent="Error sending. Please try again or email us directly.";
+        console.error(err); statusEl.textContent="Error al enviar. Prueba otra vez o escríbenos por email.";
       }
     });
 
@@ -304,13 +423,15 @@
       let i = 0;
       const attempt = () => {
         if(i >= list.length){ // no match
-          if(ph){ ph.classList.remove('hidden'); ph.innerHTML = `<span class="text-red-300 text-xs">Image not found: ${list.join(' | ')}</span>`; }
+          if(ph){ ph.classList.remove('hidden'); ph.innerHTML = `<span class="text-red-300 text-xs">Imagen no encontrada: ${list.join(' | ')}</span>`; }
           return;
         }
         const url = list[i++];
         img.onload = ()=>{ img.classList.remove('hidden'); if(ph) ph.classList.add('hidden'); };
         img.onerror = ()=> attempt();
         img.src = url;
+        img.setAttribute('srcset', `${url} 1x`);
+        img.setAttribute('sizes', '(max-width: 768px) 100vw, 33vw');
       };
       attempt();
     }
@@ -323,6 +444,55 @@
     tryLoad('gal1', candidates.fairy, 'gal1ph');
     tryLoad('gal2', candidates.couple, 'gal2ph');
     tryLoad('gal3', candidates.vr, 'gal3ph');
+
+    // ===== Prompt Studio logic =====
+    const $ = (s)=>document.querySelector(s);
+    const desc = $('#desc');
+    const style = $('#style');
+    const framing = $('#framing');
+    const light = $('#light');
+    const palette = $('#palette');
+    const ink = $('#ink');
+    const negative = $('#negative');
+    const out = $('#out');
+
+    function buildPrompt(){
+      const base = `${desc.value || 'escena anime'} — estilo ${style.value}, ${framing.value}, iluminación ${light.value}, paleta ${palette.value}, acabado ${ink.value}, profundidad de campo cinematográfica, composición de tercios, líneas de velocidad sutiles, partículas brillantes, detalle alto, coherencia anatómica, consistencia de personajes.`;
+      const neg = negative.value ? `\nnegativo: ${negative.value}.` : '';
+      out.value = base + neg;
+    }
+
+    [desc, style, framing, light, palette, ink, negative].forEach(el=> el.addEventListener('input', buildPrompt));
+    buildPrompt();
+
+    document.querySelectorAll('.preset').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        desc.value = btn.dataset.desc;
+        style.value = btn.dataset.style;
+        framing.value = btn.dataset.framing;
+        light.value = btn.dataset.light;
+        palette.value = btn.dataset.palette;
+        ink.value = btn.dataset.ink;
+        buildPrompt();
+      });
+    });
+
+    document.getElementById('copyPrompt').addEventListener('click', async()=>{
+      await navigator.clipboard.writeText(out.value);
+      const t = document.getElementById('copyPrompt');
+      const old = t.textContent; t.textContent = '¡Copiado!';
+      setTimeout(()=> t.textContent = old, 1200);
+    });
+
+    // Keyboard shortcut P to jump to studio
+    document.addEventListener('keydown', (e)=>{
+      if((e.key === 'p' || e.key === 'P') && !e.metaKey && !e.ctrlKey){
+        e.preventDefault();
+        location.hash = '#prompts';
+        desc.focus();
+      }
+    });
   </script>
 </body>
 </html>
+
