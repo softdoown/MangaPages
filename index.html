@@ -405,20 +405,25 @@ negative: &lt;artifacts to avoid&gt;.</pre>
       }
     });
 
-    // ===== IMAGE LOADER (usar nombres del repo) =====
+    // ===== IMAGE LOADER (arreglado para GitHub Pages) =====
     const candidates = {
       fairy: ["cute-anime-fairy-girl.jpg"],
       couple: ["couple.jpg"],
       vr: ["vr.jpg"]
     };
 
+    // 👉 Cambiado: prioriza GitHub Pages absoluto para cargar a la primera
+    const GH_PAGES_BASE = "https://softdoown.github.io/MangaPages/";
+
     function expandPaths(name){
       const basePath = location.pathname.endsWith("/")
         ? location.pathname
         : location.pathname.replace(/[^/]+$/, "");
       const siteAbs = `${location.origin}${basePath}${name}`;
+      const ghPagesAbs = `${GH_PAGES_BASE}${name}`;
       const raw = `https://raw.githubusercontent.com/softdoown/MangaPages/main/${name}`;
-      return [name, `${basePath}${name}`, siteAbs, raw];
+      // Orden nuevo: GH Pages absoluto → siteAbs → relative → raw
+      return [ghPagesAbs, siteAbs, `${basePath}${name}`, name, raw];
     }
 
     function tryLoad(id, list, phId){
