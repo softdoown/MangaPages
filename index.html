@@ -100,20 +100,26 @@
       <!-- Right hero panels -->
       <div class="relative grid gap-6">
         <div class="panel rounded-2xl p-3 manga-bg">
-          <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-            <img id="imgHero1" alt="Forest spirit with glowing orbs, anime style" class="w-full h-full object-cover hidden" loading="eager"/>
+          <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center">
+            <img src="https://softdoown.github.io/MangaPages/cute-anime-fairy-girl.jpg"
+                 alt="Forest spirit with glowing orbs, anime style"
+                 class="w-full h-full object-cover" loading="eager"/>
           </div>
           <div class="mt-3 text-sm text-slate-300">Forest spirit — ethereal glow</div>
         </div>
         <div class="panel rounded-2xl p-3 manga-bg">
-          <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-            <img id="imgHero2" alt="Anime couple under lanterns with warm bokeh" class="w-full h-full object-cover hidden" loading="lazy"/>
+          <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center">
+            <img src="https://softdoown.github.io/MangaPages/couple.jpg"
+                 alt="Anime couple under lanterns with warm bokeh"
+                 class="w-full h-full object-cover" loading="lazy"/>
           </div>
           <div class="mt-3 text-sm text-slate-300">Winter date — warm lights</div>
         </div>
         <div class="panel rounded-2xl p-3 manga-bg">
-          <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-            <img id="imgHero3" alt="Boy with VR headset in neon holograms" class="w-full h-full object-cover hidden" loading="lazy"/>
+          <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center">
+            <img src="https://softdoown.github.io/MangaPages/vr.jpg"
+                 alt="Boy with VR headset in neon holograms"
+                 class="w-full h-full object-cover" loading="lazy"/>
           </div>
           <div class="mt-3 text-sm text-slate-300">VR dreamscape — neon grids</div>
         </div>
@@ -305,16 +311,16 @@ negative: &lt;artifacts to avoid&gt;.</pre>
       <h2 class="font-display text-4xl font-extrabold">Visual inspiration</h2>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
         <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal1" alt="Forest fairy" class="w-full h-56 object-cover hidden" loading="lazy"/>
-          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal1ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
+          <img src="https://softdoown.github.io/MangaPages/cute-anime-fairy-girl.jpg"
+               alt="Forest fairy" class="w-full h-56 object-cover" loading="lazy"/>
         </div>
         <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal2" alt="Anime couple in the city" class="w-full h-56 object-cover hidden" loading="lazy"/>
-          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal2ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
+          <img src="https://softdoown.github.io/MangaPages/couple.jpg"
+               alt="Anime couple in the city" class="w-full h-56 object-cover" loading="lazy"/>
         </div>
         <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal3" alt="Virtual-reality visor" class="w-full h-56 object-cover hidden" loading="lazy"/>
-          <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal3ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
+          <img src="https://softdoown.github.io/MangaPages/vr.jpg"
+               alt="Virtual-reality visor" class="w-full h-56 object-cover" loading="lazy"/>
         </div>
       </div>
     </div>
@@ -404,57 +410,6 @@ negative: &lt;artifacts to avoid&gt;.</pre>
         console.error(err); statusEl.textContent="Error sending. Please try again or email us directly.";
       }
     });
-
-    // ===== IMAGE LOADER (arreglado para GitHub Pages) =====
-    const candidates = {
-      fairy: ["cute-anime-fairy-girl.jpg"],
-      couple: ["couple.jpg"],
-      vr: ["vr.jpg"]
-    };
-
-    // 👉 Cambiado: prioriza GitHub Pages absoluto para cargar a la primera
-    const GH_PAGES_BASE = "https://softdoown.github.io/MangaPages/";
-
-    function expandPaths(name){
-      const basePath = location.pathname.endsWith("/")
-        ? location.pathname
-        : location.pathname.replace(/[^/]+$/, "");
-      const siteAbs = `${location.origin}${basePath}${name}`;
-      const ghPagesAbs = `${GH_PAGES_BASE}${name}`;
-      const raw = `https://raw.githubusercontent.com/softdoown/MangaPages/main/${name}`;
-      // Orden nuevo: GH Pages absoluto → siteAbs → relative → raw
-      return [ghPagesAbs, siteAbs, `${basePath}${name}`, name, raw];
-    }
-
-    function tryLoad(id, list, phId){
-      const img = document.getElementById(id);
-      if (!img) return;
-      const ph = phId ? document.getElementById(phId) : null;
-      const urls = list.flatMap(expandPaths);
-      let i = 0;
-      const attempt = () => {
-        if (i >= urls.length){
-          if (ph){
-            ph.classList.remove("hidden");
-            ph.innerHTML = `<span class="text-red-300 text-xs">Image not found:<br>${list.join(" | ")}</span>`;
-          }
-          return;
-        }
-        const url = urls[i++] + `?v=${Date.now()}`; // anti-cache
-        img.onload = () => { img.classList.remove("hidden"); ph?.classList.add("hidden"); };
-        img.onerror = () => attempt();
-        img.src = url;
-      };
-      attempt();
-    }
-
-    // Hero + Gallery
-    tryLoad('imgHero1', candidates.fairy);
-    tryLoad('imgHero2', candidates.couple);
-    tryLoad('imgHero3', candidates.vr);
-    tryLoad('gal1', candidates.fairy, 'gal1ph');
-    tryLoad('gal2', candidates.couple, 'gal2ph');
-    tryLoad('gal3', candidates.vr, 'gal3ph');
 
     // ===== PROMPT STUDIO (OpenAI proxy only) =====
     const $ = (s)=>document.querySelector(s);
@@ -551,9 +506,9 @@ negative: &lt;artifacts to avoid&gt;.</pre>
         el.onload = ()=>{ el.classList.remove('hidden'); placeholder?.classList.add('hidden'); };
       };
     }
-    document.getElementById('useAsGal1').addEventListener('click', pushToImg('gal1','gal1ph'));
-    document.getElementById('useAsGal2').addEventListener('click', pushToImg('gal2','gal2ph'));
-    document.getElementById('useAsGal3').addEventListener('click', pushToImg('gal3','gal3ph'));
+    document.getElementById('useAsGal1').addEventListener('click', pushToImg('gal1'));
+    document.getElementById('useAsGal2').addEventListener('click', pushToImg('gal2'));
+    document.getElementById('useAsGal3').addEventListener('click', pushToImg('gal3'));
     document.getElementById('useAsHero1').addEventListener('click', pushToImg('imgHero1'));
     document.getElementById('useAsHero2').addEventListener('click', pushToImg('imgHero2'));
     document.getElementById('useAsHero3').addEventListener('click', pushToImg('imgHero3'));
