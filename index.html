@@ -386,26 +386,12 @@ negative: &lt;artifacts to avoid&gt;.</pre>
 
   <!-- IMAGE LOADER con DOMContentLoaded -->
   <script>
-    const candidates = {
-      fairy: [
-        "cute-anime-fairy-girl.jpg","cute-anime-fairy-girl.JPG","cute-anime-fairy-girl.jpeg",
-        "fairy.jpg","fairy.jpeg","fairy.webp"
-      ],
-      couple: [
-        "couple.jpg","couple.jpeg","couple.webp",
-        "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
-        "anime-style-scene-with-people-showing-affection-outdoors-street.JPG",
-        "anime-style-scene-with-people-showing-affection-outdoors-street.jpeg"
-      ],
-      vr: [
-        "vr.jpg","vr.jpeg","vr.webp","vr-visor.jpg","vr-visor.jpeg",
-        "anime-character-using-virtual-reality-glasses-metaverse.jpg",
-        "anime-character-using-virtual-reality-glasses-metaverse-.jpg",
-        "anime-character-using-virtual-reality-glasses-metaverse.jpeg",
-        "anime-character-using-virtual-reality-glasses-metaverse (1).jpg",
-        "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg"
-      ]
-    };
+const candidates = {
+  fairy: ["cute-anime-fairy-girl.jpg"],
+  couple: ["couple.jpg"],
+  vr: ["vr.jpg"]
+};
+
 
     function expandPaths(name){
       const basePath = location.pathname.endsWith("/")
