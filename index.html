@@ -3,16 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MangaPages — Turn any book into anime (real‑time AI)</title>
-  <meta name="description" content="Transform any book into an anime/manga experience. Real‑time images while you read. Prompt Studio included." />
+  <title>MangaPages — Turn any book into anime (real-time AI)</title>
+  <meta name="description" content="Transform any book into an anime/manga experience. Real-time images while you read. Prompt Studio included." />
   <meta name="theme-color" content="#0b1020" />
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="MangaPages — Turn any book into anime" />
-  <meta property="og:description" content="Immersive reading with anime/manga visuals generated in real time. Includes a Prompt Studio for perfect outputs." />
-  <meta property="og:image" content="cover-mangapages.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -25,7 +18,7 @@
           },
           colors: {
             primary: {500:'#8b5cf6',600:'#7c3aed',700:'#6d28d9'},
-            sakura: '#ff6ad5', neon: '#f59e0b', ink: '#0b1020', aqua:'#67e8f9'
+            sakura: '#ff6ad5', neon: '#f59e0b', ink: '#0b1020'
           },
           boxShadow: { glow:"0 0 0 3px rgba(255,255,255,0.18), 0 10px 30px rgba(139,92,246,.35)" }
         }
@@ -44,30 +37,11 @@
       radial-gradient(circle at 70% 80%, rgba(245,158,11,.18) 0 22%, transparent 23%),
       linear-gradient(180deg,#0b1020 0%,#0f172a 60%,#0b1020 100%)}
     .panel{backdrop-filter:blur(10px);background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.18);box-shadow:0 8px 0 rgba(0,0,0,.25)}
-    .speech{position:relative}
-    .speech:after{content:"";position:absolute;left:1.5rem;bottom:-12px;width:16px;height:16px;background:rgba(255,255,255,.06);border-left:2px solid rgba(255,255,255,.18);border-bottom:2px solid rgba(255,255,255,.18);transform:rotate(45deg)}
-    .stroke-title{text-shadow:2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000}
     .manga-bg{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 10px,rgba(255,255,255,0) 10px 20px)}
     .img-placeholder{background:radial-gradient(circle at 40% 40%,rgba(255,255,255,.08) 0 40%,transparent 41%),linear-gradient(135deg,rgba(139,92,246,.35),rgba(255,106,213,.25))}
-    .speedlines{position:relative;overflow:hidden}
-    .speedlines:before{content:"";position:absolute;inset:-40% -20%;background:repeating-linear-gradient(75deg,rgba(255,255,255,.07) 0 2px,transparent 2px 6px);transform:skewY(-8deg);pointer-events:none}
-    .badge-onom{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .7rem;border:2px solid rgba(255,255,255,.2);border-radius:.75rem;background:rgba(255,255,255,.06);box-shadow:0 6px 0 rgba(0,0,0,.25)}
-    .sticker{position:absolute;right:-8px;top:-10px;transform:rotate(6deg);font-weight:800}
+    .stroke-title{text-shadow:2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000}
     .kbd{border:1px solid rgba(255,255,255,.22);border-bottom-width:3px;border-radius:.5rem;padding:.1rem .4rem;background:rgba(255,255,255,.06)}
   </style>
-
-  <!-- schema.org -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"MangaPages",
-    "applicationCategory":"Reading",
-    "operatingSystem":"Web",
-    "description":"Immersive reading with anime/manga visuals generated in real time",
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}
-  }
-  </script>
 </head>
 <body class="bg-ink text-slate-100 font-body">
   <!-- HEADER -->
@@ -98,18 +72,17 @@
   </header>
 
   <!-- HERO -->
-  <section class="halftone speedlines relative isolate overflow-hidden">
-    <div class="mx-auto max-w-7xl px-6 pt-20 pb-24 sm:pt-24 sm:pb-28 md:pt-28 md:pb-36 grid md:grid-cols-2 gap-10 items-center">
+  <section class="halftone relative isolate overflow-hidden">
+    <div class="mx-auto max-w-7xl px-6 pt-16 pb-20 grid md:grid-cols-2 gap-10 items-center">
       <div>
         <h1 class="font-display stroke-title text-5xl sm:text-6xl leading-tight">
           <span class="text-white">Read it.</span> <span class="text-sakura">See it.</span> <span class="text-neon">Feel it.</span>
         </h1>
-        <div class="badge-onom sticker text-sakura">BAM!</div>
         <p class="mt-5 text-slate-300 text-lg max-w-xl">
-          Turn any book (PDF) into an <strong>immersive anime/manga visual journey</strong>. Real‑time images alongside your reading — high focus, high vibes.
+          Turn any book (PDF) into an <strong>immersive anime/manga visual journey</strong>. Real-time images alongside your reading — high focus, high vibes.
         </p>
         <ul class="mt-6 text-slate-300 text-sm space-y-2">
-          <li>⚡ Distraction‑free: art synced to your position.</li>
+          <li>⚡ Distraction-free: art synced to your position.</li>
           <li>🎨 Style control: shōnen, shōjo, animated film, ink…</li>
           <li>🧠 Inclusive: support for dyslexia/ADHD and classrooms.</li>
         </ul>
@@ -120,41 +93,38 @@
         <div class="mt-8 text-xs text-slate-400">Contact: <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a></div>
       </div>
 
-      <!-- Panels -->
-      <div class="relative">
-        <div class="absolute -top-8 -right-4 w-48 h-48 rounded-3xl blur-3xl bg-primary-600/30" aria-hidden="true"></div>
-        <div class="relative grid gap-6">
-          <div class="panel rounded-2xl p-3 manga-bg">
-            <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero1" alt="Forest spirit with glowing orbs, anime style" class="w-full h-full object-cover hidden" loading="eager"/>
-            </div>
-            <div class="mt-3 text-sm text-slate-300">Forest spirit — ethereal glow</div>
+      <!-- Right hero panels -->
+      <div class="relative grid gap-6">
+        <div class="panel rounded-2xl p-3 manga-bg">
+          <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
+            <img id="imgHero1" alt="Forest spirit with glowing orbs, anime style" class="w-full h-full object-cover hidden" loading="eager"/>
           </div>
-          <div class="panel rounded-2xl p-3 manga-bg">
-            <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero2" alt="Anime couple under lanterns with warm bokeh" class="w-full h-full object-cover hidden" loading="lazy"/>
-            </div>
-            <div class="mt-3 text-sm text-slate-300">Winter date — warm lights</div>
+          <div class="mt-3 text-sm text-slate-300">Forest spirit — ethereal glow</div>
+        </div>
+        <div class="panel rounded-2xl p-3 manga-bg">
+          <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
+            <img id="imgHero2" alt="Anime couple under lanterns with warm bokeh" class="w-full h-full object-cover hidden" loading="lazy"/>
           </div>
-          <div class="panel rounded-2xl p-3 manga-bg">
-            <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
-              <img id="imgHero3" alt="Boy with VR headset in neon holograms" class="w-full h-full object-cover hidden" loading="lazy"/>
-            </div>
-            <div class="mt-3 text-sm text-slate-300">VR dreamscape — neon grids</div>
+          <div class="mt-3 text-sm text-slate-300">Winter date — warm lights</div>
+        </div>
+        <div class="panel rounded-2xl p-3 manga-bg">
+          <div class="rounded-xl overflow-hidden h-44 flex items-center justify-center img-placeholder">
+            <img id="imgHero3" alt="Boy with VR headset in neon holograms" class="w-full h-full object-cover hidden" loading="lazy"/>
           </div>
+          <div class="mt-3 text-sm text-slate-300">VR dreamscape — neon grids</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FEATURES -->
-  <section id="features" class="py-20 bg-slate-900/40 border-t border-white/10">
+  <section id="features" class="py-16 bg-slate-900/40 border-t border-white/10">
     <div class="mx-auto max-w-7xl px-6">
-      <h2 class="font-display text-4xl font-extrabold">Why readers love MangaPages</h2>
-      <div class="mt-10 grid md:grid-cols-3 gap-6">
+      <h2 class="font-display text-3xl sm:text-4xl font-extrabold">Why readers love MangaPages</h2>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
         <div class="panel rounded-2xl p-6">
           <h3 class="font-semibold text-lg">Focus & immersion</h3>
-          <p class="mt-2 text-slate-300">Real‑time visuals keep pace and imagination without breaking reading flow.</p>
+          <p class="mt-2 text-slate-300">Real-time visuals keep pace and imagination without breaking reading flow.</p>
         </div>
         <div class="panel rounded-2xl p-6">
           <h3 class="font-semibold text-lg">Inclusive reading</h3>
@@ -169,10 +139,10 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section id="how" class="py-20">
+  <section id="how" class="py-16">
     <div class="mx-auto max-w-7xl px-6">
-      <h2 class="font-display text-4xl font-extrabold">How it works</h2>
-      <div class="mt-10 grid md:grid-cols-3 gap-6">
+      <h2 class="font-display text-3xl sm:text-4xl font-extrabold">How it works</h2>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
         <div class="panel rounded-2xl p-6">
           <div class="text-neon text-2xl">01</div>
           <h3 class="mt-2 font-semibold">Upload your PDF</h3>
@@ -193,22 +163,24 @@
   </section>
 
   <!-- PROMPT STUDIO -->
-  <section id="prompts" class="py-20 bg-slate-900/40 border-y border-white/10">
+  <section id="prompts" class="py-16 bg-slate-900/40 border-y border-white/10">
     <div class="mx-auto max-w-7xl px-6">
       <div class="flex items-end justify-between gap-4 flex-wrap">
-        <h2 class="font-display text-4xl font-extrabold">Prompt Studio</h2>
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold">Prompt Studio</h2>
         <div class="flex gap-2 items-center">
           <button id="copyPrompt" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm">Copy prompt</button>
           <button id="genBtn" class="px-4 py-2 rounded-xl bg-primary-600 hover:bg-primary-500 shadow-glow text-sm">Generate image</button>
         </div>
       </div>
 
-      <!-- OpenAI only (oculto por defecto; mostrar con ?dev=1) -->
+      <!-- Panel del proxy: oculto salvo ?dev=1 -->
       <div id="proxyPanel" class="mt-6 panel rounded-2xl p-6 hidden">
         <div class="text-sm">
           <div class="font-semibold mb-2">OpenAI proxy URL</div>
-          <input id="openaiUrl" type="url" value="https://manga-pages.vercel.app/api/generate-image" placeholder="https://your-project.vercel.app/api/generate-image" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
-          <p class="text-xs text-slate-400 mt-2">Visible solo en modo desarrollador (?dev=1). Este es tu endpoint en Vercel que llama a OpenAI.</p>
+          <input id="openaiUrl" type="url" value="https://manga-pages.vercel.app/api/generate-image"
+            placeholder="https://your-project.vercel.app/api/generate-image"
+            class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
+          <p class="text-xs text-slate-400 mt-2">Visible only in dev mode (?dev=1). This is your Vercel endpoint that calls OpenAI.</p>
         </div>
         <div class="mt-4 border-t border-white/10 pt-4 text-sm">
           <div class="flex items-center justify-between gap-2 flex-wrap">
@@ -234,7 +206,7 @@
                 <option>shōjo luminous</option>
                 <option>warm animated film</option>
                 <option>expressive ink manga</option>
-                <option>neon retro‑futurism</option>
+                <option>neon retro-futurism</option>
               </select>
             </div>
             <div>
@@ -242,9 +214,9 @@
               <select id="framing" class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600">
                 <option>wide shot</option>
                 <option>medium</option>
-                <option>extreme close‑up</option>
-                <option>heroic low‑angle</option>
-                <option>top‑down</option>
+                <option>extreme close-up</option>
+                <option>heroic low-angle</option>
+                <option>top-down</option>
               </select>
             </div>
           </div>
@@ -266,7 +238,7 @@
                 <option>cyan–aqua</option>
                 <option>amber–orange</option>
                 <option>misty pastels</option>
-                <option>high‑contrast B/W</option>
+                <option>high-contrast B/W</option>
               </select>
             </div>
           </div>
@@ -278,7 +250,7 @@
                 <option>dry brush + screentone</option>
                 <option>digital watercolor</option>
                 <option>grainy poster look</option>
-                <option>ink‑wash print</option>
+                <option>ink-wash print</option>
               </select>
             </div>
             <div>
@@ -288,14 +260,13 @@
           </div>
         </div>
 
-        <!-- Prompt output + Preview -->
+        <!-- Output + Preview -->
         <div class="panel rounded-2xl p-6 lg:col-span-2 space-y-4">
           <div>
             <h3 class="font-semibold">Generated prompt</h3>
             <textarea id="out" rows="6" class="mt-2 w-full rounded-xl bg-black/40 border border-white/10 px-4 py-3 font-mono text-sm" readonly></textarea>
             <div class="flex gap-3 items-center mt-3 text-sm text-slate-400"><span id="genStatus"></span></div>
           </div>
-
           <div class="grid md:grid-cols-2 gap-6 items-start">
             <div class="space-y-3">
               <h4 class="font-semibold">Live preview</h4>
@@ -312,12 +283,10 @@
                 <button id="useAsHero3" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-sm">Hero #3</button>
               </div>
             </div>
-
             <div>
               <h4 class="font-semibold">Master template</h4>
-              <pre class="mt-2 whitespace-pre-wrap break-words bg-black/40 p-4 rounded-xl border border-white/10 text-xs">[SCENE], style &lt;anime style&gt;, framing &lt;type&gt;, lighting &lt;type&gt;, palette &lt;colors&gt;, finish &lt;ink/lineart&gt;, cinematic depth of field, rule‑of‑thirds composition, subtle speed lines, particles/bokeh, high detail, anatomical coherence, character consistency.
+              <pre class="mt-2 whitespace-pre-wrap break-words bg-black/40 p-4 rounded-xl border border-white/10 text-xs">[SCENE], style &lt;anime style&gt;, framing &lt;type&gt;, lighting &lt;type&gt;, palette &lt;colors&gt;, finish &lt;ink/lineart&gt;, cinematic depth of field, rule-of-thirds composition, subtle speed lines, particles/bokeh, high detail, anatomical coherence, character consistency.
 negative: &lt;artifacts to avoid&gt;.</pre>
-              <div class="mt-3 text-xs text-slate-400">Tip: add dimensions (e.g. 768×1152) and steps according to your model.</div>
             </div>
           </div>
 
@@ -325,7 +294,7 @@ negative: &lt;artifacts to avoid&gt;.</pre>
           <div class="mt-6 grid md:grid-cols-3 gap-4">
             <button class="preset btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm" data-desc="forest fairy floating above lake with fireflies" data-style="shōjo luminous" data-framing="wide shot" data-light="moonlight with particles" data-palette="misty pastels" data-ink="digital watercolor">Night fairy</button>
             <button class="preset btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm" data-desc="teen couple under lanterns on a wet street" data-style="shōnen kinetic" data-framing="medium" data-light="golden hour" data-palette="amber–orange" data-ink="clean lineart + cel shading">Urban date</button>
-            <button class="preset btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm" data-desc="boy with VR visor surrounded by holographic panels" data-style="neon retro‑futurism" data-framing="heroic low‑angle" data-light="neon night" data-palette="cyan–aqua" data-ink="grainy poster look">VR dream</button>
+            <button class="preset btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-sm" data-desc="boy with VR visor surrounded by holographic panels" data-style="neon retro-futurism" data-framing="heroic low-angle" data-light="neon night" data-palette="cyan–aqua" data-ink="grainy poster look">VR dream</button>
           </div>
         </div>
       </div>
@@ -333,10 +302,10 @@ negative: &lt;artifacts to avoid&gt;.</pre>
   </section>
 
   <!-- GALLERY -->
-  <section id="gallery" class="py-20">
+  <section id="gallery" class="py-16">
     <div class="mx-auto max-w-7xl px-6">
-      <h2 class="font-display text-4xl font-extrabold">Visual inspiration</h2>
-      <div class="mt-10 grid md:grid-cols-3 gap-6">
+      <h2 class="font-display text-3xl sm:text-4xl font-extrabold">Visual inspiration</h2>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
         <div class="panel rounded-2xl overflow-hidden">
           <img id="gal1" alt="Forest fairy" class="w-full h-56 object-cover hidden" loading="lazy"/>
           <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal1ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
@@ -346,7 +315,7 @@ negative: &lt;artifacts to avoid&gt;.</pre>
           <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal2ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
         </div>
         <div class="panel rounded-2xl overflow-hidden">
-          <img id="gal3" alt="Virtual‑reality visor" class="w-full h-56 object-cover hidden" loading="lazy"/>
+          <img id="gal3" alt="Virtual-reality visor" class="w-full h-56 object-cover hidden" loading="lazy"/>
           <div class="h-56 w-full img-placeholder flex items-center justify-center" id="gal3ph"><span class="text-slate-200 text-sm">Placeholder</span></div>
         </div>
       </div>
@@ -354,12 +323,12 @@ negative: &lt;artifacts to avoid&gt;.</pre>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-20 bg-slate-900/40 border-t border-white/10">
+  <section id="contact" class="py-16 bg-slate-900/40 border-t border-white/10">
     <div class="mx-auto max-w-3xl px-6">
-      <h2 class="font-display text-4xl font-extrabold">Request early access</h2>
+      <h2 class="font-display text-3xl sm:text-4xl font-extrabold">Request early access</h2>
       <p class="mt-2 text-slate-300">Fill the form and we’ll reach out. Or email us at <a class="underline" href="mailto:jesus@softdoown.com">jesus@softdoown.com</a>.</p>
 
-      <form id="leadForm" class="mt-8 panel rounded-2xl p-6 grid gap-5 speech">
+      <form id="leadForm" class="mt-8 panel rounded-2xl p-6 grid gap-5">
         <div class="grid md:grid-cols-2 gap-5">
           <div>
             <label class="text-sm">Full name</label>
@@ -402,8 +371,9 @@ negative: &lt;artifacts to avoid&gt;.</pre>
     </div>
   </footer>
 
+  <!-- ===== SCRIPTS ===== -->
   <script>
-    // ===== MOBILE NAV
+    // Mobile nav + year
     const btn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
     btn?.addEventListener('click', ()=> {
@@ -412,101 +382,78 @@ negative: &lt;artifacts to avoid&gt;.</pre>
       mobileNav.classList.toggle('hidden');
     });
     document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 
-    // ===== CONTACT FORM (mailto fallback) =====
-    const ENDPOINT_URL = ""; // optional contact endpoint
-    const form = document.getElementById('leadForm');
-    const statusEl = document.getElementById('formStatus');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      statusEl.textContent = "Sending...";
-      const data = Object.fromEntries(new FormData(form).entries());
-      try {
-        if (!ENDPOINT_URL) {
-          const subject = encodeURIComponent('MangaPages — Early Access');
-          const body = encodeURIComponent(`Name: ${data.name}%0AEmail: ${data.email}%0ARole: ${data.role}%0AMessage: ${data.message}`);
-          window.location.href = `mailto:jesus@softdoown.com?subject=${subject}&body=${body}`;
-          statusEl.textContent = "No endpoint configured. Opened email client.";
+  <!-- IMAGE LOADER con DOMContentLoaded -->
+  <script>
+    const candidates = {
+      fairy: [
+        "cute-anime-fairy-girl.jpg","cute-anime-fairy-girl.JPG","cute-anime-fairy-girl.jpeg",
+        "fairy.jpg","fairy.jpeg","fairy.webp"
+      ],
+      couple: [
+        "couple.jpg","couple.jpeg","couple.webp",
+        "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
+        "anime-style-scene-with-people-showing-affection-outdoors-street.JPG",
+        "anime-style-scene-with-people-showing-affection-outdoors-street.jpeg"
+      ],
+      vr: [
+        "vr.jpg","vr.jpeg","vr.webp","vr-visor.jpg","vr-visor.jpeg",
+        "anime-character-using-virtual-reality-glasses-metaverse.jpg",
+        "anime-character-using-virtual-reality-glasses-metaverse-.jpg",
+        "anime-character-using-virtual-reality-glasses-metaverse.jpeg",
+        "anime-character-using-virtual-reality-glasses-metaverse (1).jpg",
+        "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg"
+      ]
+    };
+
+    function expandPaths(name){
+      const basePath = location.pathname.endsWith("/")
+        ? location.pathname
+        : location.pathname.replace(/[^/]+$/, "");
+      const siteAbs = `${location.origin}${basePath}${name}`;
+      const raw = `https://raw.githubusercontent.com/softdoown/MangaPages/main/${name}`;
+      return [name, `${basePath}${name}`, siteAbs, raw];
+    }
+
+    function tryLoad(id, list, phId){
+      const img = document.getElementById(id);
+      if (!img) { console.warn(`[img:${id}] not found in DOM`); return; }
+      const ph = phId ? document.getElementById(phId) : null;
+      const urls = list.flatMap(expandPaths);
+      let i = 0;
+
+      const attempt = () => {
+        if (i >= urls.length){
+          if (ph){
+            ph.classList.remove("hidden");
+            ph.innerHTML = `<span class="text-red-300 text-xs">Image not found:<br>${list.join(" | ")}</span>`;
+          }
+          console.warn(`[img:${id}] none matched`, urls);
           return;
         }
-        const res = await fetch(ENDPOINT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,source:'landing-mangapages'})});
-        if(!res.ok) throw new Error('Network response was not ok');
-        form.reset(); statusEl.textContent="Thanks! We'll contact you soon.";
-      } catch (err) {
-        console.error(err); statusEl.textContent="Error sending. Please try again or email us directly.";
-      }
-    });
-
-    // ===== IMAGE LOADER (static placeholders) =====
-    <script>
-// ===== IMAGE LOADER ROBUSTO =====
-const candidates = {
-  fairy: [
-    "cute-anime-fairy-girl.jpg","cute-anime-fairy-girl.JPG","cute-anime-fairy-girl.jpeg",
-    "fairy.jpg","fairy.jpeg","fairy.webp"
-  ],
-  couple: [
-    "couple.jpg","couple.jpeg","couple.webp",
-    "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
-    "anime-style-scene-with-people-showing-affection-outdoors-street.JPG",
-    "anime-style-scene-with-people-showing-affection-outdoors-street.jpeg"
-  ],
-  vr: [
-    "vr.jpg","vr.jpeg","vr.webp","vr-visor.jpg","vr-visor.jpeg",
-    "anime-character-using-virtual-reality-glasses-metaverse.jpg",
-    "anime-character-using-virtual-reality-glasses-metaverse-.jpg",
-    "anime-character-using-virtual-reality-glasses-metaverse.jpeg",
-    "anime-character-using-virtual-reality-glasses-metaverse (1).jpg",
-    "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg"
-  ]
-};
-
-// Construye rutas posibles: relativa, con basePath, absoluta del sitio y raw de GitHub
-function expandPaths(name){
-  const basePath = location.pathname.replace(/[^/]+$/, ''); // p.ej. /MangaPages/
-  const siteAbs = `${location.origin}${basePath}${name}`;    // https://softdoown.github.io/MangaPages/name
-  const raw = `https://raw.githubusercontent.com/softdoown/MangaPages/main/${name}`;
-  return [name, `${basePath}${name}`, siteAbs, raw];
-}
-
-function tryLoad(id, list, phId){
-  const img = document.getElementById(id);
-  const ph = phId ? document.getElementById(phId) : null;
-  // expande todas las rutas posibles para cada nombre
-  const urls = list.flatMap(expandPaths);
-  let i = 0;
-
-  const attempt = () => {
-    if(i >= urls.length){
-      if(ph){
-        ph.classList.remove('hidden');
-        ph.innerHTML = `<span class="text-red-300 text-xs">Image not found:<br>${list.join(' | ')}</span>`;
-      }
-      console.warn(`[img:${id}] none matched`, urls);
-      return;
+        const url = urls[i++] + `?v=${Date.now()}`;
+        img.onload = () => { img.classList.remove("hidden"); ph?.classList.add("hidden"); };
+        img.onerror = () => attempt();
+        img.src = url;
+        img.setAttribute("srcset", `${url} 1x`);
+        img.setAttribute("sizes", "(max-width: 768px) 100vw, 33vw");
+      };
+      attempt();
     }
-    const url = urls[i++] + `?v=${Date.now()}`; // cache buster
-    img.onload = () => { img.classList.remove('hidden'); ph?.classList.add('hidden'); };
-    img.onerror = () => attempt();
-    img.src = url;
-    img.setAttribute('srcset', `${url} 1x`);
-    img.setAttribute('sizes', '(max-width: 768px) 100vw, 33vw');
-  };
-  attempt();
-}
 
-// Hero
-tryLoad('imgHero1', candidates.fairy);
-tryLoad('imgHero2', candidates.couple);
-tryLoad('imgHero3', candidates.vr);
-// Gallery
-tryLoad('gal1', candidates.fairy, 'gal1ph');
-tryLoad('gal2', candidates.couple, 'gal2ph');
-tryLoad('gal3', candidates.vr, 'gal3ph');
-</script>
+    document.addEventListener("DOMContentLoaded", () => {
+      tryLoad("imgHero1", candidates.fairy);
+      tryLoad("imgHero2", candidates.couple);
+      tryLoad("imgHero3", candidates.vr);
+      tryLoad("gal1", candidates.fairy, "gal1ph");
+      tryLoad("gal2", candidates.couple, "gal2ph");
+      tryLoad("gal3", candidates.vr, "gal3ph");
+    });
+  </script>
 
-
-    // ===== Prompt Studio logic (OpenAI only) =====
+  <!-- PROMPT STUDIO (OpenAI only) -->
+  <script>
     const $ = (s)=>document.querySelector(s);
     const desc = $('#desc');
     const style = $('#style');
@@ -521,17 +468,15 @@ tryLoad('gal3', candidates.vr, 'gal3ph');
     const genPreview = document.getElementById('genPreview');
     const genSkeleton = document.getElementById('genSkeleton');
 
-    // Modo desarrollador: mostrar panel con ?dev=1
+    // dev panel
     const DEV_MODE = new URLSearchParams(location.search).get('dev') === '1';
     const proxyPanel = document.getElementById('proxyPanel');
     if (DEV_MODE) proxyPanel.classList.remove('hidden');
 
-    // URL por defecto protegida (no visible en UI salvo dev)
     const DEFAULT_PROXY_URL = 'https://manga-pages.vercel.app/api/generate-image';
     const openaiUrlInput = document.getElementById('openaiUrl');
-
-    // Persistir solo en modo dev; en modo normal ignoramos cambios del usuario
     let OPENAI_PROXY_URL = DEFAULT_PROXY_URL;
+
     if (DEV_MODE) {
       const settings = JSON.parse(localStorage.getItem('mp_settings')||'{}');
       if(settings.openaiUrl){ openaiUrlInput.value = settings.openaiUrl; }
@@ -542,12 +487,11 @@ tryLoad('gal3', candidates.vr, 'gal3ph');
     }
 
     function buildPrompt(){
-      const base = `${desc.value || 'anime scene'} — style ${style.value}, ${framing.value}, lighting ${light.value}, palette ${palette.value}, finish ${ink.value}, cinematic depth of field, rule‑of‑thirds composition, subtle speed lines, sparkling particles, high detail, anatomical coherence, character consistency.`;
-      const neg = negative.value ? `
-negative: ${negative.value}.` : '';
+      const base = `${desc?.value || 'anime scene'} — style ${style.value}, ${framing.value}, lighting ${light.value}, palette ${palette.value}, finish ${ink.value}, cinematic depth of field, rule-of-thirds composition, subtle speed lines, sparkling particles, high detail, anatomical coherence, character consistency.`;
+      const neg = negative.value ? `\nnegative: ${negative.value}.` : '';
       out.value = base + neg;
     }
-    [desc, style, framing, light, palette, ink, negative].forEach(el=> el.addEventListener('input', buildPrompt));
+    [desc, style, framing, light, palette, ink, negative].forEach(el=> el?.addEventListener('input', buildPrompt));
     buildPrompt();
 
     document.querySelectorAll('.preset').forEach(btn=>{
@@ -579,7 +523,7 @@ negative: ${negative.value}.` : '';
         throw new Error('Proxy ' + res.status + ': ' + msg);
       }
       const data = await res.json();
-      return data.image || data.url; // data:image/... or http(s) URL
+      return data.image || data.url;
     }
 
     async function generateImage(){
@@ -603,7 +547,33 @@ negative: ${negative.value}.` : '';
     }
     genBtn.addEventListener('click', generateImage);
 
-    // Diagnostics (solo en modo dev)
+    // send preview to slots
+    function pushToImg(id, ph){
+      return ()=>{
+        if(!genPreview.src) return;
+        const el = document.getElementById(id);
+        const placeholder = ph ? document.getElementById(ph) : null;
+        el.src = genPreview.src;
+        el.onload = ()=>{ el.classList.remove('hidden'); placeholder?.classList.add('hidden'); };
+      };
+    }
+    document.getElementById('useAsGal1').addEventListener('click', pushToImg('gal1','gal1ph'));
+    document.getElementById('useAsGal2').addEventListener('click', pushToImg('gal2','gal2ph'));
+    document.getElementById('useAsGal3').addEventListener('click', pushToImg('gal3','gal3ph'));
+    document.getElementById('useAsHero1').addEventListener('click', pushToImg('imgHero1'));
+    document.getElementById('useAsHero2').addEventListener('click', pushToImg('imgHero2'));
+    document.getElementById('useAsHero3').addEventListener('click', pushToImg('imgHero3'));
+
+    // shortcuts
+    document.addEventListener('keydown', (e)=>{
+      if((e.key === 'p' || e.key === 'P') && !e.metaKey && !e.ctrlKey){
+        e.preventDefault();
+        location.hash = '#prompts';
+        desc.focus();
+      }
+    });
+
+    // diagnostics (dev only)
     const diagBtn = document.getElementById('diagBtn');
     const diagLog = document.getElementById('diagLog');
     function logDiag(msg, ok){
@@ -614,10 +584,6 @@ negative: ${negative.value}.` : '';
     diagBtn?.addEventListener('click', ()=>{
       diagLog.innerHTML = '';
       const url = (openaiUrlInput?.value||'').trim();
-      const valid = /^https?:\/\/.+\/api\/generate-image$/.test(url);
-      logDiag('OpenAI proxy URL format valid: ' + (valid ? 'yes' : 'no'), valid);
-      logDiag('Tip: use your production domain (e.g. https://manga-pages.vercel.app/api/generate-image).', true);
-    });
       const valid = /^https?:\/\/.+\/api\/generate-image$/.test(url);
       logDiag('OpenAI proxy URL format valid: ' + (valid ? 'yes' : 'no'), valid);
       logDiag('Tip: use your production domain (e.g. https://manga-pages.vercel.app/api/generate-image).', true);
