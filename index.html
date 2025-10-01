@@ -166,7 +166,7 @@
     </div>
   </section>
 
-  <!-- PROMPT STUDIO (OpenAI via proxy) -->
+  <!-- PROMPT STUDIO -->
   <section id="prompts" class="py-20 bg-slate-900/40 border-y border-white/10">
     <div class="mx-auto max-w-7xl px-6">
       <div class="flex items-end justify-between gap-4 flex-wrap">
@@ -177,12 +177,12 @@
         </div>
       </div>
 
-      <!-- Provider config (OpenAI only) -->
+      <!-- OpenAI proxy (solo visible con ?dev=1) -->
       <div id="proxyPanel" class="mt-6 panel rounded-2xl p-6 hidden">
         <div class="text-sm">
           <div class="font-semibold mb-2">OpenAI proxy URL</div>
           <input id="openaiUrl" type="url" placeholder="https://your-project.vercel.app/api/generate-image" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
-          <p class="text-xs text-slate-400 mt-2">This is your Vercel endpoint that calls OpenAI with your API key (kept secret on server). This panel only appears with <code>?dev=1</code>.</p>
+          <p class="text-xs text-slate-400 mt-2">This panel only appears with <code>?dev=1</code>. Your key stays on the server.</p>
         </div>
       </div>
 
@@ -536,7 +536,7 @@ negative: &lt;artifacts to avoid&gt;.</pre>
     }
     genBtn.addEventListener('click', generateImage);
 
-    // Move preview to hero/gallery
+    // Mover preview a hero / gallery
     function pushToImg(id, ph){
       return ()=>{
         if(!genPreview.src) return;
@@ -553,7 +553,7 @@ negative: &lt;artifacts to avoid&gt;.</pre>
     document.getElementById('useAsHero2').addEventListener('click', pushToImg('imgHero2'));
     document.getElementById('useAsHero3').addEventListener('click', pushToImg('imgHero3'));
 
-    // Keyboard shortcut P to jump to studio
+    // Atajo P para ir al Studio
     document.addEventListener('keydown', (e)=>{
       if((e.key === 'p' || e.key === 'P') && !e.metaKey && !e.ctrlKey){
         e.preventDefault();
