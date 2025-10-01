@@ -203,12 +203,12 @@
         </div>
       </div>
 
-      <!-- OpenAI only -->
-      <div class="mt-6 panel rounded-2xl p-6">
+      <!-- OpenAI only (oculto por defecto; mostrar con ?dev=1) -->
+      <div id="proxyPanel" class="mt-6 panel rounded-2xl p-6 hidden">
         <div class="text-sm">
           <div class="font-semibold mb-2">OpenAI proxy URL</div>
           <input id="openaiUrl" type="url" value="https://manga-pages.vercel.app/api/generate-image" placeholder="https://your-project.vercel.app/api/generate-image" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-primary-600" />
-          <p class="text-xs text-slate-400 mt-2">This is your Vercel endpoint that calls OpenAI with your API key (kept secret on server).</p>
+          <p class="text-xs text-slate-400 mt-2">Visible solo en modo desarrollador (?dev=1). Este es tu endpoint en Vercel que llama a OpenAI.</p>
         </div>
         <div class="mt-4 border-t border-white/10 pt-4 text-sm">
           <div class="flex items-center justify-between gap-2 flex-wrap">
@@ -440,19 +440,22 @@ negative: &lt;artifacts to avoid&gt;.</pre>
     // ===== IMAGE LOADER (static placeholders) =====
     const candidates = {
       fairy: [
-        "cute-anime-fairy-girl.jpg","cute-anime-fairy-girl.JPG","cute-anime-fairy-girl.jpeg"
+        "cute-anime-fairy-girl.jpg","cute-anime-fairy-girl.JPG","cute-anime-fairy-girl.jpeg",
+        "fairy.jpg","fairy.jpeg","fairy.webp"
       ],
       couple: [
         "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
         "anime-style-scene-with-people-showing-affection-outdoors-street.JPG",
-        "anime-style-scene-with-people-showing-affection-outdoors-street.jpeg"
+        "anime-style-scene-with-people-showing-affection-outdoors-street.jpeg",
+        "couple.jpg","couple.jpeg","city-couple.jpg","city-couple.jpeg","couple.webp"
       ],
       vr: [
         "anime-character-using-virtual-reality-glasses-metaverse.jpg",
         "anime-character-using-virtual-reality-glasses-metaverse-.jpg",
         "anime-character-using-virtual-reality-glasses-metaverse.jpeg",
         "anime-character-using-virtual-reality-glasses-metaverse (1).jpg",
-        "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg"
+        "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg",
+        "vr.jpg","vr.jpeg","vr.webp","vr-visor.jpg","vr-visor.jpeg"
       ]
     };
     function tryLoad(id, list, phId){
@@ -491,18 +494,31 @@ negative: &lt;artifacts to avoid&gt;.</pre>
     const genStatus = document.getElementById('genStatus');
     const genPreview = document.getElementById('genPreview');
     const genSkeleton = document.getElementById('genSkeleton');
-    const openaiUrl = document.getElementById('openaiUrl');
 
-    // Persist URL locally
-    const settings = JSON.parse(localStorage.getItem('mp_settings')||'{}');
-    if(settings.openaiUrl){ openaiUrl.value = settings.openaiUrl; }
-    openaiUrl.addEventListener('input', ()=>{
-      localStorage.setItem('mp_settings', JSON.stringify({ openaiUrl: openaiUrl.value.trim() }));
-    });
+    // Modo desarrollador: mostrar panel con ?dev=1
+    const DEV_MODE = new URLSearchParams(location.search).get('dev') === '1';
+    const proxyPanel = document.getElementById('proxyPanel');
+    if (DEV_MODE) proxyPanel.classList.remove('hidden');
+
+    // URL por defecto protegida (no visible en UI salvo dev)
+    const DEFAULT_PROXY_URL = 'https://manga-pages.vercel.app/api/generate-image';
+    const openaiUrlInput = document.getElementById('openaiUrl');
+
+    // Persistir solo en modo dev; en modo normal ignoramos cambios del usuario
+    let OPENAI_PROXY_URL = DEFAULT_PROXY_URL;
+    if (DEV_MODE) {
+      const settings = JSON.parse(localStorage.getItem('mp_settings')||'{}');
+      if(settings.openaiUrl){ openaiUrlInput.value = settings.openaiUrl; }
+      openaiUrlInput?.addEventListener('input', ()=>{
+        localStorage.setItem('mp_settings', JSON.stringify({ openaiUrl: openaiUrlInput.value.trim() }));
+      });
+      OPENAI_PROXY_URL = (openaiUrlInput?.value || DEFAULT_PROXY_URL).trim();
+    }
 
     function buildPrompt(){
       const base = `${desc.value || 'anime scene'} — style ${style.value}, ${framing.value}, lighting ${light.value}, palette ${palette.value}, finish ${ink.value}, cinematic depth of field, rule‑of‑thirds composition, subtle speed lines, sparkling particles, high detail, anatomical coherence, character consistency.`;
-      const neg = negative.value ? `\nnegative: ${negative.value}.` : '';
+      const neg = negative.value ? `
+negative: ${negative.value}.` : '';
       out.value = base + neg;
     }
     [desc, style, framing, light, palette, ink, negative].forEach(el=> el.addEventListener('input', buildPrompt));
@@ -528,10 +544,14 @@ negative: &lt;artifacts to avoid&gt;.</pre>
     });
 
     async function generateViaOpenAI(prompt){
-      const url = openaiUrl.value.trim();
+      const url = DEV_MODE ? (openaiUrlInput?.value?.trim() || OPENAI_PROXY_URL) : OPENAI_PROXY_URL;
       if(!/^https?:\/\//.test(url)) throw new Error('OpenAI proxy URL is empty or invalid');
       const res = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ prompt }) });
-      if(!res.ok) throw new Error('Bad response from OpenAI proxy');
+      if(!res.ok){
+        let msg;
+        try { const j = await res.json(); msg = j.details || j.error || JSON.stringify(j); } catch { msg = await res.text(); }
+        throw new Error('Proxy ' + res.status + ': ' + msg);
+      }
       const data = await res.json();
       return data.image || data.url; // data:image/... or http(s) URL
     }
@@ -557,7 +577,7 @@ negative: &lt;artifacts to avoid&gt;.</pre>
     }
     genBtn.addEventListener('click', generateImage);
 
-    // Diagnostics (format checks only, no billing)
+    // Diagnostics (solo en modo dev)
     const diagBtn = document.getElementById('diagBtn');
     const diagLog = document.getElementById('diagLog');
     function logDiag(msg, ok){
@@ -567,7 +587,11 @@ negative: &lt;artifacts to avoid&gt;.</pre>
     }
     diagBtn?.addEventListener('click', ()=>{
       diagLog.innerHTML = '';
-      const url = (openaiUrl.value||'').trim();
+      const url = (openaiUrlInput?.value||'').trim();
+      const valid = /^https?:\/\/.+\/api\/generate-image$/.test(url);
+      logDiag('OpenAI proxy URL format valid: ' + (valid ? 'yes' : 'no'), valid);
+      logDiag('Tip: use your production domain (e.g. https://manga-pages.vercel.app/api/generate-image).', true);
+    });
       const valid = /^https?:\/\/.+\/api\/generate-image$/.test(url);
       logDiag('OpenAI proxy URL format valid: ' + (valid ? 'yes' : 'no'), valid);
       logDiag('Tip: use your production domain (e.g. https://manga-pages.vercel.app/api/generate-image).', true);
