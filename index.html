@@ -438,47 +438,73 @@ negative: &lt;artifacts to avoid&gt;.</pre>
     });
 
     // ===== IMAGE LOADER (static placeholders) =====
-    const candidates = {
-      fairy: [
-        "cute-anime-fairy-girl.jpg","cute-anime-fairy-girl.JPG","cute-anime-fairy-girl.jpeg",
-        "fairy.jpg","fairy.jpeg","fairy.webp"
-      ],
-      couple: [
-        "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
-        "anime-style-scene-with-people-showing-affection-outdoors-street.JPG",
-        "anime-style-scene-with-people-showing-affection-outdoors-street.jpeg",
-        "couple.jpg","couple.jpeg","city-couple.jpg","city-couple.jpeg","couple.webp"
-      ],
-      vr: [
-        "anime-character-using-virtual-reality-glasses-metaverse.jpg",
-        "anime-character-using-virtual-reality-glasses-metaverse-.jpg",
-        "anime-character-using-virtual-reality-glasses-metaverse.jpeg",
-        "anime-character-using-virtual-reality-glasses-metaverse (1).jpg",
-        "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg",
-        "vr.jpg","vr.jpeg","vr.webp","vr-visor.jpg","vr-visor.jpeg"
-      ]
-    };
-    function tryLoad(id, list, phId){
-      const img = document.getElementById(id);
-      const ph = phId ? document.getElementById(phId) : null;
-      let i = 0;
-      const attempt = () => {
-        if(i >= list.length){ if(ph){ ph.classList.remove('hidden'); ph.innerHTML = `<span class=\"text-red-300 text-xs\">Image not found: ${list.join(' | ')}</span>`; } return; }
-        const url = list[i++];
-        img.onload = ()=>{ img.classList.remove('hidden'); if(ph) ph.classList.add('hidden'); };
-        img.onerror = ()=> attempt();
-        img.src = url;
-        img.setAttribute('srcset', `${url} 1x`);
-        img.setAttribute('sizes', '(max-width: 768px) 100vw, 33vw');
-      };
-      attempt();
+    <script>
+// ===== IMAGE LOADER ROBUSTO =====
+const candidates = {
+  fairy: [
+    "cute-anime-fairy-girl.jpg","cute-anime-fairy-girl.JPG","cute-anime-fairy-girl.jpeg",
+    "fairy.jpg","fairy.jpeg","fairy.webp"
+  ],
+  couple: [
+    "couple.jpg","couple.jpeg","couple.webp",
+    "anime-style-scene-with-people-showing-affection-outdoors-street.jpg",
+    "anime-style-scene-with-people-showing-affection-outdoors-street.JPG",
+    "anime-style-scene-with-people-showing-affection-outdoors-street.jpeg"
+  ],
+  vr: [
+    "vr.jpg","vr.jpeg","vr.webp","vr-visor.jpg","vr-visor.jpeg",
+    "anime-character-using-virtual-reality-glasses-metaverse.jpg",
+    "anime-character-using-virtual-reality-glasses-metaverse-.jpg",
+    "anime-character-using-virtual-reality-glasses-metaverse.jpeg",
+    "anime-character-using-virtual-reality-glasses-metaverse (1).jpg",
+    "anime-character-using-virtual-reality-glasses-metaverse%20(1).jpg"
+  ]
+};
+
+// Construye rutas posibles: relativa, con basePath, absoluta del sitio y raw de GitHub
+function expandPaths(name){
+  const basePath = location.pathname.replace(/[^/]+$/, ''); // p.ej. /MangaPages/
+  const siteAbs = `${location.origin}${basePath}${name}`;    // https://softdoown.github.io/MangaPages/name
+  const raw = `https://raw.githubusercontent.com/softdoown/MangaPages/main/${name}`;
+  return [name, `${basePath}${name}`, siteAbs, raw];
+}
+
+function tryLoad(id, list, phId){
+  const img = document.getElementById(id);
+  const ph = phId ? document.getElementById(phId) : null;
+  // expande todas las rutas posibles para cada nombre
+  const urls = list.flatMap(expandPaths);
+  let i = 0;
+
+  const attempt = () => {
+    if(i >= urls.length){
+      if(ph){
+        ph.classList.remove('hidden');
+        ph.innerHTML = `<span class="text-red-300 text-xs">Image not found:<br>${list.join(' | ')}</span>`;
+      }
+      console.warn(`[img:${id}] none matched`, urls);
+      return;
     }
-    tryLoad('imgHero1', candidates.fairy);
-    tryLoad('imgHero2', candidates.couple);
-    tryLoad('imgHero3', candidates.vr);
-    tryLoad('gal1', candidates.fairy, 'gal1ph');
-    tryLoad('gal2', candidates.couple, 'gal2ph');
-    tryLoad('gal3', candidates.vr, 'gal3ph');
+    const url = urls[i++] + `?v=${Date.now()}`; // cache buster
+    img.onload = () => { img.classList.remove('hidden'); ph?.classList.add('hidden'); };
+    img.onerror = () => attempt();
+    img.src = url;
+    img.setAttribute('srcset', `${url} 1x`);
+    img.setAttribute('sizes', '(max-width: 768px) 100vw, 33vw');
+  };
+  attempt();
+}
+
+// Hero
+tryLoad('imgHero1', candidates.fairy);
+tryLoad('imgHero2', candidates.couple);
+tryLoad('imgHero3', candidates.vr);
+// Gallery
+tryLoad('gal1', candidates.fairy, 'gal1ph');
+tryLoad('gal2', candidates.couple, 'gal2ph');
+tryLoad('gal3', candidates.vr, 'gal3ph');
+</script>
+
 
     // ===== Prompt Studio logic (OpenAI only) =====
     const $ = (s)=>document.querySelector(s);
