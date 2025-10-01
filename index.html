@@ -385,58 +385,56 @@ negative: &lt;artifacts to avoid&gt;.</pre>
   </script>
 
   <!-- IMAGE LOADER con DOMContentLoaded -->
-  <script>
-const candidates = {
-  fairy: ["cute-anime-fairy-girl.jpg"],
-  couple: ["couple.jpg"],
-  vr: ["vr.jpg"]
-};
+ <script>
+  // ===== IMAGE LOADER (usa tus nombres de archivo) =====
+  const candidates = {
+    fairy: ["cute-anime-fairy-girl.jpg"],
+    couple: ["couple.jpg"],
+    vr: ["vr.jpg"]
+  };
 
+  function expandPaths(name){
+    const basePath = location.pathname.endsWith("/")
+      ? location.pathname
+      : location.pathname.replace(/[^/]+$/, "");
+    const siteAbs = `${location.origin}${basePath}${name}`;
+    const raw = `https://raw.githubusercontent.com/softdoown/MangaPages/main/${name}`;
+    return [name, `${basePath}${name}`, siteAbs, raw];
+  }
 
-    function expandPaths(name){
-      const basePath = location.pathname.endsWith("/")
-        ? location.pathname
-        : location.pathname.replace(/[^/]+$/, "");
-      const siteAbs = `${location.origin}${basePath}${name}`;
-      const raw = `https://raw.githubusercontent.com/softdoown/MangaPages/main/${name}`;
-      return [name, `${basePath}${name}`, siteAbs, raw];
-    }
-
-    function tryLoad(id, list, phId){
-      const img = document.getElementById(id);
-      if (!img) { console.warn(`[img:${id}] not found in DOM`); return; }
-      const ph = phId ? document.getElementById(phId) : null;
-      const urls = list.flatMap(expandPaths);
-      let i = 0;
-
-      const attempt = () => {
-        if (i >= urls.length){
-          if (ph){
-            ph.classList.remove("hidden");
-            ph.innerHTML = `<span class="text-red-300 text-xs">Image not found:<br>${list.join(" | ")}</span>`;
-          }
-          console.warn(`[img:${id}] none matched`, urls);
-          return;
+  function tryLoad(id, list, phId){
+    const img = document.getElementById(id);
+    if (!img) return;
+    const ph = phId ? document.getElementById(phId) : null;
+    const urls = list.flatMap(expandPaths);
+    let i = 0;
+    const attempt = () => {
+      if (i >= urls.length){
+        if (ph){
+          ph.classList.remove("hidden");
+          ph.innerHTML = `<span class="text-red-300 text-xs">Image not found:<br>${list.join(" | ")}</span>`;
         }
-        const url = urls[i++] + `?v=${Date.now()}`;
-        img.onload = () => { img.classList.remove("hidden"); ph?.classList.add("hidden"); };
-        img.onerror = () => attempt();
-        img.src = url;
-        img.setAttribute("srcset", `${url} 1x`);
-        img.setAttribute("sizes", "(max-width: 768px) 100vw, 33vw");
-      };
-      attempt();
-    }
+        return;
+      }
+      const url = urls[i++] + `?v=${Date.now()}`; // anti-cache
+      img.onload = () => { img.classList.remove("hidden"); ph?.classList.add("hidden"); };
+      img.onerror = () => attempt();
+      img.src = url;
+    };
+    attempt();
+  }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      tryLoad("imgHero1", candidates.fairy);
-      tryLoad("imgHero2", candidates.couple);
-      tryLoad("imgHero3", candidates.vr);
-      tryLoad("gal1", candidates.fairy, "gal1ph");
-      tryLoad("gal2", candidates.couple, "gal2ph");
-      tryLoad("gal3", candidates.vr, "gal3ph");
-    });
-  </script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Hero
+    tryLoad("imgHero1", candidates.fairy);
+    tryLoad("imgHero2", candidates.couple);
+    tryLoad("imgHero3", candidates.vr);
+    // Gallery
+    tryLoad("gal1", candidates.fairy, "gal1ph");
+    tryLoad("gal2", candidates.couple, "gal2ph");
+    tryLoad("gal3", candidates.vr, "gal3ph");
+  });
+</script>
 
   <!-- PROMPT STUDIO (OpenAI only) -->
   <script>
